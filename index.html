@@ -9,86 +9,86 @@
 :root{--pink:#e91e63;--bg:#f2f2f2;--card:#fff;--text:#333;--muted:#999;--border:#eee}
 body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;max-width:600px;margin:0 auto}
 
-.header{padding:16rpx 24rpx;background:var(--card);display:flex;align-items:center;gap:16rpx}
+.header{padding:8px 12px;background:var(--card);display:flex;align-items:center;gap:8px}
 .search-box{flex:1;display:flex;align-items:center;position:relative}
-.search-box input{width:100%;height:64rpx;border:none;border-radius:32rpx;padding:0 56rpx 0 28rpx;font-size:26rpx;background:#f5f5f5;outline:none}
-.search-icon{position:absolute;right:20rpx;font-size:28rpx}
+.search-box input{width:100%;height:36px;border:none;border-radius:18px;padding:0 32px 0 14px;font-size:14px;background:#f5f5f5;outline:none}
+.search-icon{position:absolute;right:10px;font-size:16px}
 
-.cat-bar{white-space:nowrap;background:var(--card);padding:14rpx 24rpx;border-bottom:1rpx solid #f0f0f0;overflow-x:auto;scrollbar-width:none}
+.cat-bar{white-space:nowrap;background:var(--card);padding:8px 12px;border-bottom:1px solid #f0f0f0;overflow-x:auto;scrollbar-width:none}
 .cat-bar::-webkit-scrollbar{display:none}
-.cat-tag{display:inline-block;padding:10rpx 20rpx;font-size:24rpx;color:#666;margin-right:8rpx;border-radius:20rpx;background:#f5f5f5;cursor:pointer;user-select:none}
+.cat-tag{display:inline-block;padding:6px 12px;font-size:13px;color:#666;margin-right:6px;border-radius:14px;background:#f5f5f5;cursor:pointer;user-select:none}
 .cat-tag.active{color:#fff;background:var(--pink);font-weight:600}
 
-.filter-bar{background:var(--card);padding:0 24rpx}
-.filter-title{padding:18rpx 0;font-size:24rpx;color:var(--muted);display:flex;align-items:center;gap:6rpx;cursor:pointer}
+.filter-bar{background:var(--card);padding:0 12px}
+.filter-title{padding:10px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px;cursor:pointer}
 .filter-title .arr{transition:transform .3s}
 .filter-title .arr.open{transform:rotate(90deg)}
-.filter-body{padding-bottom:14rpx}
-.filter-row{white-space:nowrap;margin-bottom:10rpx;overflow-x:auto;scrollbar-width:none}
+.filter-body{padding-bottom:8px}
+.filter-row{white-space:nowrap;margin-bottom:6px;overflow-x:auto;scrollbar-width:none}
 .filter-row::-webkit-scrollbar{display:none}
-.chip{display:inline-flex;align-items:center;gap:6rpx;padding:8rpx 20rpx;border-radius:20rpx;font-size:22rpx;margin-right:10rpx;background:#f5f5f5;cursor:pointer;user-select:none}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:14px;font-size:12px;margin-right:6px;background:#f5f5f5;cursor:pointer;user-select:none}
 .chip.active{background:var(--pink);color:#fff}
 
-.main{padding:12rpx 12rpx 40rpx}
-.count-text{font-size:22rpx;color:var(--muted);padding:8rpx 8rpx 12rpx}
-.grid{display:flex;flex-wrap:wrap;gap:12rpx}
-.card{width:calc(50% - 6rpx);background:var(--card);border-radius:12rpx;overflow:hidden;cursor:pointer}
-.card-img{width:100%;height:340rpx;overflow:hidden;position:relative;background:#f5f5f5}
+.main{padding:8px 8px 40px}
+.count-text{font-size:12px;color:var(--muted);padding:6px 6px 8px}
+.grid{display:flex;flex-wrap:wrap;gap:8px}
+.card{width:calc(50% - 4px);background:var(--card);border-radius:8px;overflow:hidden;cursor:pointer}
+.card-img{width:100%;height:180px;overflow:hidden;position:relative;background:#f5f5f5}
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64rpx}
-.card-body{padding:14rpx 16rpx 16rpx}
-.card-name{font-size:26rpx;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:6rpx}
-.card-meta{display:flex;gap:6rpx;margin-bottom:10rpx;flex-wrap:wrap}
-.card-meta .tag{font-size:20rpx;color:var(--pink);padding:2rpx 8rpx;border:1rpx solid #fce4ec;border-radius:6rpx}
+.card-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
+.card-body{padding:8px 10px 10px}
+.card-name{font-size:13px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:4px}
+.card-meta{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
+.card-meta .tag{font-size:11px;color:var(--pink);padding:2px 6px;border:1px solid #fce4ec;border-radius:4px}
 .card-footer{display:flex;justify-content:space-between;align-items:center}
-.price{font-size:32rpx;font-weight:700;color:var(--pink)}
-.cart-btn{width:52rpx;height:52rpx;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24rpx;cursor:pointer;border:none}
+.price{font-size:18px;font-weight:700;color:var(--pink)}
+.cart-btn{width:32px;height:32px;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;border:none}
 
-.empty{text-align:center;padding:120rpx;color:var(--muted);font-size:28rpx}
-.admin-link{text-align:center;padding:40rpx;font-size:22rpx;color:#ddd;cursor:pointer}
+.empty{text-align:center;padding:120px;color:var(--muted);font-size:28px}
+.admin-link{text-align:center;padding:40px;font-size:22px;color:#ddd;cursor:pointer}
 
 /* 详情 */
 .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;display:none}
 .detail-overlay.on{display:flex}
-.detail-modal{background:var(--card);border-radius:16rpx;width:95%;max-height:90vh;overflow-y:auto}
+.detail-modal{background:var(--card);border-radius:16px;width:95%;max-height:90vh;overflow-y:auto}
 .detail-img{width:100%;aspect-ratio:4/3;background:#f5f5f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .detail-img img{width:100%;height:100%;object-fit:contain}
-.detail-close{position:absolute;top:16rpx;right:16rpx;width:36rpx;height:36rpx;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:20rpx;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
-.detail-body{padding:24rpx}
-.detail-price{font-size:48rpx;font-weight:700;color:var(--pink);margin-bottom:8rpx}
-.detail-name{font-size:32rpx;font-weight:600;line-height:1.5;margin-bottom:16rpx}
-.detail-meta{display:flex;gap:12rpx;flex-wrap:wrap;margin-bottom:16rpx}
-.detail-meta .tag{font-size:24rpx;background:#f5f5f5;padding:8rpx 18rpx;border-radius:16rpx;color:var(--muted)}
-.detail-notes{font-size:28rpx;color:#666;line-height:1.8;background:#fafafa;padding:24rpx;border-radius:12rpx;margin-bottom:16rpx}
-.detail-act{display:flex;gap:16rpx}
-.detail-act button{flex:1;border-radius:40rpx;font-size:28rpx;padding:20rpx;border:none;cursor:pointer;font-weight:600}
+.detail-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.detail-body{padding:24px}
+.detail-price{font-size:48px;font-weight:700;color:var(--pink);margin-bottom:8px}
+.detail-name{font-size:32px;font-weight:600;line-height:1.5;margin-bottom:16px}
+.detail-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.detail-meta .tag{font-size:24px;background:#f5f5f5;padding:8px 18px;border-radius:16px;color:var(--muted)}
+.detail-notes{font-size:28px;color:#666;line-height:1.8;background:#fafafa;padding:24px;border-radius:12px;margin-bottom:16px}
+.detail-act{display:flex;gap:16px}
+.detail-act button{flex:1;border-radius:40px;font-size:28px;padding:20px;border:none;cursor:pointer;font-weight:600}
 .add-cart{background:var(--pink);color:#fff}
-.go-cart{background:#fff;color:var(--pink);border:2rpx solid var(--pink)}
+.go-cart{background:#fff;color:var(--pink);border:2px solid var(--pink)}
 
 /* 购物车面板 */
 .cart-panel{position:fixed;top:0;right:-100%;width:100%;max-width:400px;bottom:0;background:var(--card);z-index:150;transition:right .3s;display:flex;flex-direction:column}
 .cart-panel.open{right:0}
 .cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:149;display:none}
 .cart-backdrop.on{display:block}
-.cart-head{padding:20rpx;border-bottom:1rpx solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.cart-close{width:34rpx;height:34rpx;border-radius:50%;border:none;background:#f5f5f5;cursor:pointer;font-size:18rpx}
-.cart-body{flex:1;overflow-y:auto;padding:20rpx}
-.cart-item{display:flex;gap:14rpx;padding:12rpx;border-radius:12rpx;margin-bottom:10rpx;background:#fafafa;align-items:center}
-.cart-item-img{width:56rpx;height:56rpx;border-radius:10rpx;overflow:hidden;background:#f0f0f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28rpx}
+.cart-head{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-close{width:34px;height:34px;border-radius:50%;border:none;background:#f5f5f5;cursor:pointer;font-size:18px}
+.cart-body{flex:1;overflow-y:auto;padding:20px}
+.cart-item{display:flex;gap:14px;padding:12px;border-radius:12px;margin-bottom:10px;background:#fafafa;align-items:center}
+.cart-item-img{width:56px;height:56px;border-radius:10px;overflow:hidden;background:#f0f0f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px}
 .cart-item-img img{width:100%;height:100%;object-fit:cover}
 .cart-item-info{flex:1}
 .cart-item-name{font-weight:600;font-size:14px}
-.cart-item-row{display:flex;align-items:center;gap:8rpx;margin-top:6rpx}
-.cart-qty-btn{padding:2rpx 8rpx;border:1rpx solid var(--border);border-radius:20rpx;cursor:pointer;background:#fff;font-size:14rpx}
+.cart-item-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cart-qty-btn{padding:2px 8px;border:1px solid var(--border);border-radius:20px;cursor:pointer;background:#fff;font-size:14px}
 .cart-item-price{margin-left:auto;font-weight:700;color:var(--pink)}
-.cart-foot{padding:20rpx;border-top:1rpx solid var(--border)}
-.cart-total{font-size:20rpx;font-weight:700;color:var(--pink);text-align:center;margin-bottom:12rpx}
+.cart-foot{padding:20px;border-top:1px solid var(--border)}
+.cart-total{font-size:20px;font-weight:700;color:var(--pink);text-align:center;margin-bottom:12px}
 
-.btn{padding:9rpx 20rpx;border-radius:20rpx;border:none;font-size:13rpx;cursor:pointer;font-weight:600}
-.btn-primary{background:var(--pink);color:#fff;width:100%;padding:14rpx}
-.btn-outline{background:#fff;color:var(--pink);border:2rpx solid var(--pink)}
+.btn{padding:9px 20px;border-radius:20px;border:none;font-size:13px;cursor:pointer;font-weight:600}
+.btn-primary{background:var(--pink);color:#fff;width:100%;padding:14px}
+.btn-outline{background:#fff;color:var(--pink);border:2px solid var(--pink)}
 
-.toast{position:fixed;top:20rpx;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12rpx 24rpx;border-radius:24rpx;font-size:14rpx;z-index:999;animation:in .3s}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;z-index:999;animation:in .3s}
 @keyframes in{from{opacity:0}}
 </style>
 </head>
@@ -99,7 +99,7 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg)
     <input placeholder="搜索衣服..." oninput="filter()">
     <span class="search-icon">🔍</span>
   </div>
-  <button class="btn btn-outline" onclick="openCart()" style="position:relative">🛒<span id="cartBadge" style="position:absolute;top:-6rpx;right:-6rpx;background:var(--pink);color:#fff;font-size:10rpx;min-width:18rpx;height:18rpx;border-radius:9rpx;display:none">0</span></button>
+  <button class="btn btn-outline" onclick="openCart()" style="position:relative">🛒<span id="cartBadge" style="position:absolute;top:-6px;right:-6px;background:var(--pink);color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:9px;display:none">0</span></button>
 </div>
 
 <div class="cat-bar" id="catBar"></div>
@@ -217,7 +217,7 @@ function openDetail(id){
   const g=goods.find(x=>x.id===id);if(!g)return;detailId=id;
   const cat=CATS.find(c=>c.id===g.category);
   const img=g.images&&g.images.length?g.images[0]:g.image||'';
-  document.getElementById('detailImg').innerHTML=img?`<img src="${img}">`:`<div style="font-size:100rpx">${cat?.e||'👔'}</div>`;
+  document.getElementById('detailImg').innerHTML=img?`<img src="${img}">`:`<div style="font-size:100px">${cat?.e||'👔'}</div>`;
   document.getElementById('detailPrice').innerHTML='¥'+(g.price||'--');
   document.getElementById('detailName').textContent=g.name;
   document.getElementById('detailMeta').innerHTML=`<span class="tag">${cat?.e||''} ${cat?.n||g.category}</span>${(g.season||[]).map(s=>`<span class="tag">${s}季</span>`).join('')}`;
@@ -241,7 +241,7 @@ function closeCart(){document.getElementById('cartPanel').classList.remove('open
 
 function renderCart(){
   const body=document.getElementById('cartBody'),foot=document.getElementById('cartFoot');
-  if(!cart.length){body.innerHTML='<div style="text-align:center;padding:40rpx;color:var(--muted)">🛒 购物车是空的</div>';foot.style.display='none';return}
+  if(!cart.length){body.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">🛒 购物车是空的</div>';foot.style.display='none';return}
   body.innerHTML=cart.map((item,i)=>`
     <div class="cart-item">
       <div class="cart-item-img">${item.images&&item.images.length?`<img src="${item.images[0]}">`:item.image?`<img src="${item.image}">`:'👔'}</div>
