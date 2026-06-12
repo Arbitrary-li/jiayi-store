@@ -79,6 +79,11 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg)
 
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;z-index:999;animation:in .3s}
 </style>
+<script>
+// 自动更新缓存：版本号变了就强制刷新
+var V='7';
+if(localStorage.getItem('v')!==V){localStorage.setItem('v',V);location.reload(true)}
+</script>
 </head>
 <body>
 
