@@ -2,470 +2,290 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jiayi Store - 商家管理</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>佳一女装 - 商家管理</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-:root { --pink: #e91e63; --pink-light: #fce4ec; --pink-dark: #c2185b; --bg: #f5f5f5; --card-bg: #fff; --text: #333; --text-light: #999; --border: #eee; --radius: 12px; }
-body { font-family: 'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+:root { --pink:#e91e63; --pink-light:#fce4ec; --bg:#f5f5f5; --card:#fff; --text:#333; --muted:#999; --border:#eee; }
+body { font-family:'PingFang SC','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
 
-.login-page { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%); }
-.login-box { background:#fff; border-radius:20px; padding:40px 32px; width:90%; max-width:380px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.15); }
-.login-box h1 { font-size:24px; margin-bottom:4px; }
-.login-box .sub { color:var(--text-light); font-size:13px; margin-bottom:24px; }
-.login-box input { width:100%; padding:12px 16px; border:2px solid var(--border); border-radius:12px; font-size:15px; text-align:center; outline:none; letter-spacing:3px; margin-bottom:16px; }
+/* 登录 */
+.login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#fce4ec,#f8bbd0); }
+.login-box { background:#fff; border-radius:24px; padding:48px 32px; width:90%; max-width:360px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+.login-box h1 { font-size:32px; margin-bottom:8px; }
+.login-box .sub { color:var(--muted); font-size:14px; margin-bottom:32px; }
+.login-box input { width:100%; padding:14px; border:2px solid var(--border); border-radius:12px; font-size:16px; text-align:center; outline:none; margin-bottom:20px; }
 .login-box input:focus { border-color:var(--pink); }
 .login-box .err { color:#e53935; font-size:13px; margin-bottom:12px; display:none; }
-.login-box .btn { width:100%; }
 
-.admin-page { display:none; }
-.toolbar { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
-.toolbar-inner { max-width:1280px; margin:0 auto; padding:0 24px; display:flex; align-items:center; height:60px; gap:16px; }
-.toolbar .logo { font-size:20px; font-weight:700; }
-.toolbar .info { font-size:13px; color:var(--text-light); }
-.toolbar .spacer { flex:1; }
-
-.btn { padding:9px 20px; border-radius:20px; border:none; font-size:13px; cursor:pointer; font-weight:600; transition:all .2s; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
-.btn-primary { background:var(--pink); color:#fff; }
-.btn-primary:hover { background:var(--pink-dark); }
+.btn { padding:12px 24px; border-radius:24px; border:none; font-size:14px; cursor:pointer; font-weight:600; transition:all .2s; display:inline-flex; align-items:center; gap:6px; }
+.btn-primary { background:linear-gradient(135deg,#e91e63,#c2185b); color:#fff; width:100%; justify-content:center; padding:14px; font-size:16px; box-shadow:0 4px 12px rgba(233,30,99,0.3); }
 .btn-outline { background:#fff; color:var(--pink); border:2px solid var(--pink); }
-.btn-outline:hover { background:var(--pink-light); }
-.btn-danger { background:#fff; color:#e53935; border:2px solid #e53935; }
-.btn-danger:hover { background:#ffebee; }
-.btn-sm { padding:5px 12px; font-size:12px; }
+.btn-ghost { background:#fff; color:var(--muted); border:2px solid var(--border); }
+.btn-danger { background:#e53935; color:#fff; }
+.btn-sm { padding:8px 16px; font-size:12px; }
 
-.stats { max-width:1280px; margin:20px auto 0; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-.stat-card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
-.stat-card .num { font-size:32px; font-weight:700; color:var(--pink); }
-.stat-card .label { font-size:13px; color:var(--text-light); margin-top:4px; }
+/* 管理界面 */
+.admin-page { display:none; max-width:800px; margin:0 auto; padding-bottom:40px; }
+.toolbar { display:flex; align-items:center; padding:16px 20px; background:#fff; gap:10px; flex-wrap:wrap; position:sticky; top:0; z-index:10; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
+.toolbar-title { font-size:20px; font-weight:800; flex:1; }
+.status-bar { display:flex; justify-content:space-between; padding:14px 20px; font-size:13px; color:var(--muted); }
+.status-link { color:var(--pink); font-weight:600; cursor:pointer; }
+.batch-bar { padding:0 20px 14px; }
+.batch-bar .btn { width:100%; justify-content:center; }
 
-.content { max-width:1280px; margin:20px auto; padding:0 24px 40px; }
-.table-wrap { background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
-table { width:100%; border-collapse:collapse; }
-th, td { padding:14px 16px; text-align:left; border-bottom:1px solid var(--border); font-size:14px; }
-th { background:#fafafa; font-weight:600; font-size:13px; color:var(--text-light); }
-.td-img { width:52px; height:52px; border-radius:8px; overflow:hidden; background:#f5f5f5; display:flex; align-items:center; justify-content:center; font-size:24px; }
-.td-img img { width:100%; height:100%; object-fit:cover; }
-.td-name { font-weight:600; }
-.td-tags { display:flex; gap:4px; flex-wrap:wrap; }
-.td-tag { font-size:11px; background:#f5f5f5; padding:2px 8px; border-radius:8px; color:var(--text-light); white-space:nowrap; }
-.td-price { font-weight:700; color:var(--pink); white-space:nowrap; }
+/* 商品列表 */
+.goods-list { padding:0 20px; }
+.goods-item { display:flex; gap:14px; padding:16px; background:#fff; border-radius:14px; margin-bottom:10px; align-items:center; }
+.goods-check { width:36px; height:36px; border-radius:50%; border:2px solid #ddd; display:flex; align-items:center; justify-content:center; font-size:16px; color:#fff; flex-shrink:0; cursor:pointer; }
+.goods-check.on { background:var(--pink); border-color:var(--pink); }
+.goods-img { width:80px; height:100px; border-radius:10px; object-fit:cover; flex-shrink:0; background:#f5f5f5; }
+.goods-img-placeholder { width:80px; height:100px; border-radius:10px; background:#f5f5f5; display:flex; align-items:center; justify-content:center; font-size:32px; flex-shrink:0; }
+.goods-info { flex:1; overflow:hidden; }
+.goods-name { font-size:15px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.goods-meta { font-size:12px; color:var(--muted); margin-top:4px; }
+.goods-actions { display:flex; flex-direction:column; gap:10px; font-size:18px; cursor:pointer; }
+.goods-actions span:hover { opacity:.7; }
 
-.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:200; display:flex; align-items:center; justify-content:center; animation:fadeIn .2s; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-.modal { background:#fff; border-radius:16px; width:90%; max-width:560px; max-height:88vh; overflow-y:auto; padding:28px; animation:slideUp .25s; }
-@keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
-.modal h2 { font-size:20px; margin-bottom:20px; text-align:center; }
+/* 弹窗 */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100; display:flex; align-items:flex-end; animation:in .2s; }
+@keyframes in { from{opacity:0} to{opacity:1} }
+.modal { background:#fff; border-radius:24px 24px 0 0; padding:28px; width:100%; max-height:90vh; overflow-y:auto; max-width:600px; margin:0 auto; }
+.modal h3 { text-align:center; margin-bottom:20px; font-size:18px; }
 .form-group { margin-bottom:16px; }
-.form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:#555; }
-.form-group input, .form-group select, .form-group textarea { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:10px; font-size:14px; outline:none; transition:border .2s; font-family:inherit; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--pink); }
+.form-group label { display:block; font-size:13px; font-weight:600; color:#555; margin-bottom:6px; }
+.form-group input, .form-group textarea { width:100%; padding:12px; border:2px solid var(--border); border-radius:10px; font-size:14px; outline:none; background:#fafafa; }
+.form-group input:focus, .form-group textarea:focus { border-color:var(--pink); background:#fff; }
 .form-group textarea { resize:vertical; min-height:60px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+.form-row { display:flex; gap:12px; }
 
-.img-upload-area { border:2px dashed var(--border); border-radius:12px; padding:20px; text-align:center; cursor:pointer; transition:all .2s; margin-bottom:8px; position:relative; min-height:120px; display:flex; align-items:center; justify-content:center; flex-direction:column; }
-.img-upload-area:hover { border-color:var(--pink); background:#fce4ec22; }
-.img-upload-area.has-image { padding:0; border-style:solid; min-height:180px; }
-.img-upload-area img { max-width:100%; max-height:250px; object-fit:contain; border-radius:8px; }
-.img-upload-area .remove-img { position:absolute; top:8px; right:8px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.6); color:#fff; border:none; font-size:16px; cursor:pointer; z-index:5; display:none; }
-.img-upload-area.has-image .remove-img { display:flex; }
-.img-upload-area.has-image .upload-hint { display:none; }
-.upload-hint { color:var(--text-light); font-size:13px; }
-.upload-hint .icon { font-size:36px; display:block; margin-bottom:4px; }
-.img-url-row { display:flex; gap:8px; }
-.img-url-row input { flex:1; }
+/* 图片网格 */
+.img-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+.img-cell { position:relative; width:120px; height:120px; }
+.img-cell img { width:100%; height:100%; object-fit:cover; border-radius:8px; }
+.img-cell .del { position:absolute; top:-6px; right:-6px; width:26px; height:26px; background:#e53935; color:#fff; border-radius:50%; text-align:center; line-height:26px; font-size:14px; cursor:pointer; }
+.img-add { width:120px; height:120px; border:2px dashed #ddd; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:40px; color:#ccc; cursor:pointer; }
+.img-add:hover { border-color:var(--pink); color:var(--pink); }
 
-.color-options, .season-options { display:flex; gap:8px; flex-wrap:wrap; }
-.color-dot { width:32px; height:32px; border-radius:50%; cursor:pointer; border:3px solid transparent; transition:all .2s; }
-.color-dot:hover { transform:scale(1.15); }
-.color-dot.selected { border-color:var(--pink); box-shadow:0 0 0 3px rgba(233,30,99,0.2); }
-.season-chip { padding:6px 16px; border-radius:16px; cursor:pointer; border:2px solid var(--border); font-size:13px; transition:all .2s; }
-.season-chip:hover { border-color:var(--pink); }
-.season-chip.selected { background:var(--pink); color:#fff; border-color:var(--pink); }
+/* 标签 */
+.tag-row { display:flex; gap:8px; flex-wrap:wrap; }
+.tag-chip { padding:8px 20px; border-radius:20px; font-size:13px; border:2px solid var(--border); cursor:pointer; background:#fff; }
+.tag-chip.on { background:var(--pink); color:#fff; border-color:var(--pink); }
 
-.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:24px; font-size:14px; z-index:999; animation:toastIn .3s, toastOut .3s 1.8s forwards; }
-@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(-10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
-@keyframes toastOut { from{opacity:1} to{opacity:0;transform:translateX(-50%) translateY(-10px)} }
+.form-actions { display:flex; gap:12px; margin-top:24px; }
+.form-actions button { flex:1; justify-content:center; }
 
-@media (max-width:768px) { .stats { grid-template-columns:repeat(2,1fr); } th:nth-child(4), td:nth-child(4) { display:none; } }
+.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:24px; font-size:14px; z-index:999; animation:in .3s; }
 </style>
 </head>
 <body>
 
-<div class="login-page" id="loginPage">
+<!-- 登录 -->
+<div class="login-wrap" id="loginPage">
   <div class="login-box">
-    <h1>🔐 商家管理</h1>
-    <p class="sub">Jiayi Store 管理后台</p>
-    <input type="password" id="pwdInput" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')login()">
+    <h1>佳一女装</h1>
+    <p class="sub">商家管理后台</p>
+    <input type="password" id="pwdInput" placeholder="管理密码" onkeydown="if(event.key==='Enter')login()">
     <div class="err" id="loginErr">密码错误</div>
     <button class="btn btn-primary" onclick="login()">进入后台</button>
-    <button class="btn btn-outline btn-sm" onclick="forgotPwd()" style="width:100%;margin-top:12px;">忘记密码？</button>
   </div>
 </div>
 
+<!-- 管理界面 -->
 <div class="admin-page" id="adminPage">
   <div class="toolbar">
-    <div class="toolbar-inner">
-      <div class="logo"><span>⚙️</span> 管理后台</div>
-      <span class="info" id="goodsCount">加载中...</span>
-      <span class="info" style="color:#4caf50;">☁️ Supabase</span>
-      <div class="spacer"></div>
-      <button class="btn btn-outline btn-sm" onclick="window.open('index.html')">👁 预览店铺</button>
-      <button class="btn btn-primary" onclick="openModal()">+ 添加商品</button>
-      <button class="btn btn-outline btn-sm" onclick="openSettings()">⚙️ 设置</button>
-      <button class="btn btn-outline btn-sm" onclick="logout()">退出</button>
-    </div>
+    <span class="toolbar-title">佳一女装</span>
+    <button class="btn btn-outline btn-sm" onclick="openModal()">+ 添加</button>
+    <button class="btn btn-outline btn-sm" onclick="window.open('index.html')">👁 看店铺</button>
+    <button class="btn btn-sm" id="editModeBtn" onclick="toggleEditMode()">☑ 编辑</button>
+    <button class="btn btn-ghost btn-sm" onclick="logout()">退出</button>
   </div>
-
-  <div class="stats" id="statsRow"></div>
-
-  <div class="content">
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>图片</th><th>名称</th><th>分类</th><th>颜色/季节</th><th>价格</th><th>操作</th></tr></thead>
-        <tbody id="goodsTable"><tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-light);">加载中...</td></tr></tbody>
-      </table>
-    </div>
+  <div class="status-bar">
+    <span id="statusText">加载中...</span>
+    <span class="status-link" id="selectAllBtn" style="display:none;" onclick="selectAll()">全选</span>
   </div>
+  <div class="batch-bar" id="batchBar" style="display:none;">
+    <button class="btn btn-danger" onclick="batchDelete()">🗑 删除已选</button>
+  </div>
+  <div class="goods-list" id="goodsList"></div>
 </div>
 
+<!-- 编辑弹窗 -->
 <div class="modal-overlay" id="modalOverlay" style="display:none;" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
-    <h2 id="modalTitle">➕ 添加商品</h2>
-    <form id="goodsForm" onsubmit="saveGoods(event)">
+    <h3 id="modalTitle">添加商品</h3>
+    <form id="goodsForm" onsubmit="save(event)">
       <input type="hidden" id="gId">
+
       <div class="form-group">
-        <label>商品图片</label>
-        <div class="img-upload-area" id="imgUploadArea" onclick="document.getElementById('fileInput').click()">
-          <img id="imgPreview" src="" style="display:none;" alt="">
-          <button type="button" class="remove-img" id="removeImgBtn" onclick="removeImage(event)">✕</button>
-          <div class="upload-hint"><span class="icon">📷</span>点击上传 · Ctrl+V 粘贴 · 下方贴链接</div>
+        <label>商品图片 (<span id="imgCount">0</span>/9)</label>
+        <div class="img-grid" id="imgGrid">
+          <div class="img-add" onclick="chooseImages()">+</div>
         </div>
-        <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(event)" style="display:none;">
-        <input type="hidden" id="gImage" value="">
-        <div class="img-url-row" style="margin-top:6px;"><input type="text" id="gImageUrl" placeholder="或粘贴图片链接 https://..." oninput="previewUrl(this.value)"></div>
+        <input type="hidden" id="gImages" value="[]">
+        <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(this)" style="display:none;">
       </div>
-      <div class="form-group"><label>商品名称 *</label><input type="text" id="gName" required placeholder="例如：复古碎花连衣裙"></div>
+
+      <div class="form-group"><label>名称 *</label><input id="gName" required placeholder="例如：复古碎花连衣裙"></div>
       <div class="form-row">
-        <div class="form-group"><label>分类 *</label><select id="gCategory" required></select></div>
-        <div class="form-group"><label>价格 (¥)</label><input type="number" id="gPrice" placeholder="例如：299" min="0" step="0.01"></div>
+        <div class="form-group" style="flex:1;"><label>分类</label><select id="gCategory"></select></div>
+        <div class="form-group" style="flex:1;"><label>价格 ¥</label><input type="number" id="gPrice" placeholder="299" min="0" step="0.01"></div>
       </div>
-      <div class="form-group"><label>颜色</label><div class="color-options" id="colorOptions"></div><input type="hidden" id="gColor"></div>
-      <div class="form-group"><label>适用季节</label><div class="season-options" id="seasonOptions"></div><input type="hidden" id="gSeason"></div>
-      <div class="form-group"><label>描述 / 面料 / 尺码</label><textarea id="gNotes" placeholder="面料、尺码、风格等..."></textarea></div>
-      <div class="form-group" style="display:flex;align-items:center;gap:10px;">
-        <input type="checkbox" id="gFeatured" style="width:20px;height:20px;accent-color:var(--pink);">
-        <label for="gFeatured" style="margin:0;font-size:14px;">🔥 设为爆款推荐（顾客页顶部轮播展示）</label>
+      <div class="form-group"><label>备注</label><textarea id="gNotes" placeholder="面料、尺码、风格..."></textarea></div>
+      <div class="form-group">
+        <label>季节</label>
+        <div class="tag-row" id="seasonTags"></div>
+        <input type="hidden" id="gSeason" value="[]">
+        <input type="hidden" id="gColor" value="">
+        <input type="hidden" id="gFeatured" value="false">
       </div>
       <div class="form-actions">
-        <button type="button" class="btn btn-outline" onclick="closeModal()">取消</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal()">取消</button>
         <button type="submit" class="btn btn-primary">💾 保存</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- 设置弹窗 -->
-<div class="modal-overlay" id="settingsOverlay" style="display:none;" onclick="closeSettings(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <h2>⚙️ 设置</h2>
-
-    <!-- 修改密码 -->
-    <div style="border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px;">
-      <h4 style="margin-bottom:12px;">🔑 修改管理密码</h4>
-      <div class="form-group"><label>当前密码</label><input type="password" id="oldPwd" placeholder="输入当前密码"></div>
-      <div class="form-group"><label>新密码</label><input type="password" id="newPwd" placeholder="输入新密码"></div>
-      <div class="form-group"><label>确认新密码</label><input type="password" id="newPwd2" placeholder="再次输入新密码"></div>
-      <button class="btn btn-primary btn-sm" onclick="changePwd()">💾 修改密码</button>
-      <span id="pwdMsg" style="font-size:12px;margin-left:10px;"></span>
-    </div>
-
-    <!-- 找回密码设置 -->
-    <div style="border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px;">
-      <h4 style="margin-bottom:12px;">🆘 找回密码（邮箱）</h4>
-      <div class="form-group"><label>管理员邮箱</label><input type="email" id="adminEmail" placeholder="your@email.com"></div>
-      <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">忘记密码时，系统会把密码发到这个邮箱。<br>需要配置 EmailJS（免费），<a href="https://www.emailjs.com/" target="_blank" style="color:var(--pink);">点此注册</a></p>
-      <div class="form-group"><label>EmailJS Public Key</label><input type="text" id="emailjsPub" placeholder="从 EmailJS 账号获取"></div>
-      <div class="form-group"><label>EmailJS Service ID</label><input type="text" id="emailjsSvc" placeholder="例如 service_xxxxx"></div>
-      <div class="form-group"><label>EmailJS Template ID</label><input type="text" id="emailjsTpl" placeholder="例如 template_xxxxx"></div>
-      <button class="btn btn-primary btn-sm" onclick="saveEmailSettings()">💾 保存邮箱设置</button>
-      <span id="emailMsg" style="font-size:12px;margin-left:10px;"></span>
-    </div>
-
-    <!-- 商家联系方式 -->
-    <div style="border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px;">
-      <h4 style="margin-bottom:12px;">📞 顾客下单联系方式</h4>
-      <div class="form-group"><label>微信 / 其它联系方式</label><input type="text" id="merchantContact" placeholder="例如：微信号 wechat123"></div>
-      <p style="font-size:12px;color:var(--text-light);">顾客点"发给商家下单"后，会自动生成订单并提示发到这里。</p>
-      <button class="btn btn-primary btn-sm" onclick="saveContact()">💾 保存</button>
-      <span id="contactMsg" style="font-size:12px;margin-left:10px;"></span>
-    </div>
-
-    <button class="btn btn-outline" onclick="closeSettings()" style="width:100%;">关闭</button>
-  </div>
-</div>
-
 <div id="toastContainer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-// ============ Supabase 初始化 ============
+// ============ Supabase ============
 const sb = supabase.createClient(
   'https://rixhfnacmselwjtlaohn.supabase.co',
   'sb_publishable_mlPbrrg5TdAq6wh8RZ8CNA_sid5pubv'
 );
 
-function getPwd(){return localStorage.getItem('admin_pwd')||'jiayi2024';}
-function setPwd(p){localStorage.setItem('admin_pwd',p);}
-function getRec(){return localStorage.getItem('admin_recovery')||'';}
-function setRec(k){localStorage.setItem('admin_recovery',k);}
-
-const CATEGORIES = [
-  { id:'top', name:'上衣', emoji:'👕', colors:['#fff5f5','#fce4ec'] },
-  { id:'pants', name:'裤子', emoji:'👖', colors:['#e3f2fd','#bbdefb'] },
-  { id:'skirt', name:'裙子', emoji:'👗', colors:['#fce4ec','#f8bbd0'] },
-  { id:'outer', name:'外套', emoji:'🧥', colors:['#efebe9','#d7ccc8'] },
-  { id:'dress', name:'连衣裙', emoji:'👘', colors:['#f3e5f5','#e1bee7'] },
-  { id:'shoes', name:'鞋子', emoji:'👟', colors:['#e8f5e9','#c8e6c9'] },
-  { id:'acc', name:'配饰', emoji:'👜', colors:['#fff8e1','#ffecb3'] },
-  { id:'sport', name:'运动装', emoji:'🎽', colors:['#e0f7fa','#b2ebf2'] },
-];
-
-const COLORS = [
-  { name:'黑色', hex:'#333' },{ name:'白色', hex:'#fff' },{ name:'红色', hex:'#e53935' },
-  { name:'蓝色', hex:'#1e88e5' },{ name:'绿色', hex:'#43a047' },{ name:'黄色', hex:'#fdd835' },
-  { name:'粉色', hex:'#ec407a' },{ name:'灰色', hex:'#9e9e9e' },{ name:'棕色', hex:'#795548' },
-  { name:'紫色', hex:'#8e24aa' },{ name:'橙色', hex:'#fb8c00' },{ name:'米色', hex:'#f5deb3' },
+const CATS = [
+  { id:'top',name:'上衣',emoji:'👕' },{ id:'pants',name:'裤子',emoji:'👖' },
+  { id:'skirt',name:'裙子',emoji:'👗' },{ id:'outer',name:'外套',emoji:'🧥' },
+  { id:'dress',name:'连衣裙',emoji:'👘' },{ id:'shoes',name:'鞋子',emoji:'👟' },
+  { id:'acc',name:'配饰',emoji:'👜' },{ id:'sport',name:'运动装',emoji:'🎽' }
 ];
 const SEASONS = ['春','夏','秋','冬'];
+const catMap = Object.fromEntries(CATS.map(c=>[c.id,c.name]));
+const catEmoji = Object.fromEntries(CATS.map(c=>[c.id,c.emoji]));
 
-let goods = [];
+let goods = [], editMode = false, editImages = [];
 
 // ============ 登录 ============
 function login() {
-  if (document.getElementById('pwdInput').value === getPwd()) {
+  const pwd = localStorage.getItem('admin_pwd')||'jiayi2024';
+  if (document.getElementById('pwdInput').value === pwd) {
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('adminPage').style.display = 'block';
-    document.getElementById('loginErr').style.display = 'none';
     loadGoods();
   } else {
     document.getElementById('loginErr').style.display = 'block';
     document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
   }
 }
-
 function logout() {
   document.getElementById('adminPage').style.display = 'none';
   document.getElementById('loginPage').style.display = 'flex';
   document.getElementById('pwdInput').value = '';
-  closeModal(); closeSettings();
 }
 
-// ============ 设置 ============
-function openSettings() {
-  document.getElementById('oldPwd').value = '';
-  document.getElementById('newPwd').value = '';
-  document.getElementById('newPwd2').value = '';
-  document.getElementById('pwdMsg').textContent = '';
-  document.getElementById('adminEmail').value = localStorage.getItem('admin_email')||'';
-  document.getElementById('emailjsPub').value = localStorage.getItem('emailjs_pub')||'';
-  document.getElementById('emailjsSvc').value = localStorage.getItem('emailjs_svc')||'';
-  document.getElementById('emailjsTpl').value = localStorage.getItem('emailjs_tpl')||'';
-  document.getElementById('emailMsg').textContent = '';
-  document.getElementById('merchantContact').value = localStorage.getItem('merchant_contact')||'';
-  document.getElementById('contactMsg').textContent = '';
-  document.getElementById('settingsOverlay').style.display = 'flex';
-}
-
-function closeSettings(e) {
-  if (e && e.target !== document.getElementById('settingsOverlay')) return;
-  document.getElementById('settingsOverlay').style.display = 'none';
-}
-
-function changePwd() {
-  const old = document.getElementById('oldPwd').value;
-  const np = document.getElementById('newPwd').value;
-  const np2 = document.getElementById('newPwd2').value;
-  const msg = document.getElementById('pwdMsg');
-  if (old !== getPwd()) { msg.style.color = '#e53935'; msg.textContent = '当前密码错误'; return; }
-  if (!np || np.length < 3) { msg.style.color = '#e53935'; msg.textContent = '新密码至少3位'; return; }
-  if (np !== np2) { msg.style.color = '#e53935'; msg.textContent = '两次密码不一致'; return; }
-  setPwd(np);
-  msg.style.color = '#4caf50'; msg.textContent = '✅ 密码已修改';
-  setTimeout(() => { msg.textContent = ''; }, 2000);
-}
-
-function saveContact() {
-  const val = document.getElementById('merchantContact').value.trim();
-  localStorage.setItem('merchant_contact', val);
-  document.getElementById('contactMsg').style.color = '#4caf50';
-  document.getElementById('contactMsg').textContent = '✅ 已保存';
-  setTimeout(() => { document.getElementById('contactMsg').textContent = ''; }, 2000);
-}
-
-function saveEmailSettings() {
-  const email = document.getElementById('adminEmail').value.trim();
-  const pub = document.getElementById('emailjsPub').value.trim();
-  const svc = document.getElementById('emailjsSvc').value.trim();
-  const tpl = document.getElementById('emailjsTpl').value.trim();
-  localStorage.setItem('admin_email', email);
-  localStorage.setItem('emailjs_pub', pub);
-  localStorage.setItem('emailjs_svc', svc);
-  localStorage.setItem('emailjs_tpl', tpl);
-  document.getElementById('emailMsg').style.color = '#4caf50';
-  document.getElementById('emailMsg').textContent = '✅ 已保存';
-  setTimeout(() => { document.getElementById('emailMsg').textContent = ''; }, 2000);
-}
-
-async function forgotPwd() {
-  const email = localStorage.getItem('admin_email');
-  const pub = localStorage.getItem('emailjs_pub');
-  const svc = localStorage.getItem('emailjs_svc');
-  const tpl = localStorage.getItem('emailjs_tpl');
-
-  if (!email || !pub || !svc || !tpl) {
-    // 没有配置邮箱，用旧的密钥方式
-    const rec = getRec();
-    if (!rec) { toast('⚠️ 未配置邮箱找回。请先登录后台设置邮箱，或联系管理员。'); return; }
-    const ans = prompt('未配置邮箱，使用找回密钥：');
-    if (!ans) return;
-    if (ans === rec) { setPwd('jiayi2024'); toast('✅ 密码已重置为: jiayi2024'); }
-    else { toast('❌ 找回密钥错误'); }
-    return;
-  }
-
-  try {
-    emailjs.init(pub);
-    await emailjs.send(svc, tpl, {
-      to_email: email,
-      subject: 'Jiayi Store 管理密码找回',
-      message: '您的管理密码是: ' + getPwd(),
-    });
-    toast('✅ 密码已发送到 ' + email);
-  } catch(e) {
-    toast('❌ 发送失败，请检查 EmailJS 配置');
-    console.error(e);
-  }
-}
-
-// ============ 数据加载 ============
+// ============ 数据 ============
 async function loadGoods() {
-  const { data, error } = await sb.from('goods').select('*').order('created_at', { ascending: false });
-  if (error) { toast('❌ 加载失败: ' + error.message); return; }
-  goods = data;
-  renderAll();
+  const { data, error } = await sb.from('goods').select('id,name,category,price,image,images,featured').order('created_at',{ascending:false});
+  if (error) { toast('加载失败'); return; }
+  goods = (data||[]).map(g => ({...g, imgCount:(g.images||[]).length||(g.image?1:0), _checked:false}));
+  render();
 }
 
-function renderAll() { renderStats(); renderTable(); }
+function render() {
+  const n = goods.length;
+  const sel = goods.filter(g=>g._checked).length;
+  document.getElementById('statusText').textContent = `共 ${n} 件${editMode?' · 已选 '+sel:''}`;
+  document.getElementById('selectAllBtn').style.display = editMode?'inline':'none';
+  document.getElementById('selectAllBtn').textContent = sel===n?'取消全选':'全选';
+  document.getElementById('batchBar').style.display = editMode&&sel>0?'block':'none';
 
-function renderStats() {
-  const cats = {};
-  let totalVal = 0, hasImg = 0;
-  goods.forEach(g => { cats[g.category]=(cats[g.category]||0)+1; totalVal+=g.price||0; if(g.image) hasImg++; });
-  document.getElementById('statsRow').innerHTML = `
-    <div class="stat-card"><div class="num">${goods.length}</div><div class="label">商品总数</div></div>
-    <div class="stat-card"><div class="num">${Object.keys(cats).length}</div><div class="label">涵盖分类</div></div>
-    <div class="stat-card"><div class="num">¥${totalVal.toLocaleString()}</div><div class="label">库存总值</div></div>
-    <div class="stat-card"><div class="num">${hasImg}</div><div class="label">已有图片</div></div>`;
-  document.getElementById('goodsCount').textContent = `☁️ 共 ${goods.length} 件商品（云数据库）`;
+  document.getElementById('goodsList').innerHTML = goods.map(g => `
+    <div class="goods-item">
+      ${editMode?`<div class="goods-check ${g._checked?'on':''}" onclick="toggleCheck('${g.id}')">${g._checked?'✓':''}</div>`:''}
+      ${g.images&&g.images.length?`<img src="${g.images[0]}" class="goods-img">`:g.image?`<img src="${g.image}" class="goods-img">`:`<div class="goods-img-placeholder">👔</div>`}
+      <div class="goods-info">
+        <div class="goods-name">${g.featured?'🔥 ':''}${esc(g.name)}</div>
+        <div class="goods-meta">${catMap[g.category]||g.category} · ¥${g.price||'--'} · ${g.imgCount}图</div>
+      </div>
+      ${!editMode?`<div class="goods-actions"><span onclick="editGoods('${g.id}')">✎</span><span onclick="delGoods('${g.id}')" style="color:#e53935;">🗑</span></div>`:''}
+    </div>`).join('');
 }
 
-function renderTable() {
-  const tbody = document.getElementById('goodsTable');
-  if (!goods.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-light);">📭 还没有商品，点"+ 添加商品"开始上架</td></tr>'; return; }
-  tbody.innerHTML = goods.map(g => {
-    const cat = getCat(g.category);
-    return `<tr>
-      <td><div class="td-img">${g.image?`<img src="${g.image}" alt="">`:(cat?cat.emoji:'👔')}</div></td>
-      <td><div class="td-name">${g.featured?'🔥 ':''}${esc(g.name)}</div>${g.notes?`<div style="font-size:12px;color:var(--text-light);margin-top:2px;">${esc(g.notes).slice(0,40)}</div>`:''}</td>
-      <td>${cat?cat.emoji+' '+cat.name:g.category}</td>
-      <td><div class="td-tags">${g.color?`<span class="td-tag">🎨 ${g.color}</span>`:''}${(g.season||[]).map(s=>`<span class="td-tag">${s}季</span>`).join('')}</div></td>
-      <td class="td-price">¥${g.price||'--'}</td>
-      <td>
-        <button class="btn btn-outline btn-sm" onclick="openEditModal('${g.id}')">✎ 编辑</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteGoods('${g.id}')">🗑 删除</button>
-      </td></tr>`;
-  }).join('');
-}
-
-function getCat(id) { return CATEGORIES.find(c=>c.id===id); }
 function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-// ============ 图片 ============
-function handleFileUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 5*1024*1024) { toast('⚠️ 图片太大，请压缩到5MB以内'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => { document.getElementById('gImage').value = ev.target.result; document.getElementById('gImageUrl').value = ''; showPreview(ev.target.result); };
-  reader.readAsDataURL(file);
+// ============ 编辑模式 ============
+function toggleEditMode() {
+  editMode = !editMode;
+  goods.forEach(g => g._checked = false);
+  document.getElementById('editModeBtn').style.background = editMode?'var(--pink)':'#fff';
+  document.getElementById('editModeBtn').style.color = editMode?'#fff':'var(--muted)';
+  render();
 }
-function previewUrl(url) {
-  if (!url.trim()) { document.getElementById('gImage').value=''; hidePreview(); return; }
-  document.getElementById('gImage').value=url; document.getElementById('fileInput').value=''; showPreview(url);
-}
-function showPreview(src) { document.getElementById('imgPreview').src=src; document.getElementById('imgPreview').style.display='block'; document.getElementById('imgUploadArea').classList.add('has-image'); }
-function hidePreview() { document.getElementById('imgPreview').src=''; document.getElementById('imgPreview').style.display='none'; document.getElementById('imgUploadArea').classList.remove('has-image'); }
-function removeImage(e) { e.stopPropagation(); document.getElementById('gImage').value=''; document.getElementById('gImageUrl').value=''; document.getElementById('fileInput').value=''; hidePreview(); }
 
-// 粘贴图片：在图片区域按 Ctrl+V 直接粘贴
-document.addEventListener('paste', function(e) {
-  if (document.getElementById('modalOverlay').style.display !== 'flex') return;
-  const items = e.clipboardData.items;
-  for (const item of items) {
-    if (item.type.startsWith('image/')) {
-      e.preventDefault();
-      const blob = item.getAsFile();
-      if (blob.size > 5*1024*1024) { toast('⚠️ 图片太大，请压缩到5MB以内'); return; }
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        document.getElementById('gImage').value = ev.target.result;
-        document.getElementById('gImageUrl').value = '';
-        document.getElementById('fileInput').value = '';
-        showPreview(ev.target.result);
-        toast('📋 图片已粘贴');
-      };
-      reader.readAsDataURL(blob);
-      break;
-    }
-  }
-});
+function toggleCheck(id) {
+  const g = goods.find(x=>x.id===id);
+  if (g) g._checked = !g._checked;
+  render();
+}
+
+function selectAll() {
+  const all = goods.filter(g=>g._checked).length === goods.length;
+  goods.forEach(g => g._checked = !all);
+  render();
+}
+
+async function batchDelete() {
+  const ids = goods.filter(g=>g._checked).map(g=>g.id);
+  if (!ids.length || !confirm(`删除已选 ${ids.length} 件？`)) return;
+  for (const id of ids) await sb.from('goods').delete().eq('id',id);
+  editMode = false;
+  toast(`已删除${ids.length}件`);
+  loadGoods();
+}
+
+async function delGoods(id) {
+  if (!confirm('删除这件商品？')) return;
+  await sb.from('goods').delete().eq('id',id);
+  toast('已删除');
+  loadGoods();
+}
 
 // ============ 弹窗 ============
-function openModal() { openEditModal(null); }
+function openModal() { editGoods(null); }
 
-function openEditModal(gid) {
-  document.getElementById('gId').value=''; hidePreview();
-  document.getElementById('gImage').value=''; document.getElementById('gImageUrl').value=''; document.getElementById('fileInput').value='';
+function editGoods(id) {
+  document.getElementById('gId').value = id||'';
+  document.getElementById('modalTitle').textContent = id?'编辑商品':'添加商品';
+  document.getElementById('gCategory').innerHTML = CATS.map(c=>`<option value="${c.id}">${c.emoji} ${c.name}</option>`).join('');
+  document.getElementById('seasonTags').innerHTML = SEASONS.map(s=>`<span class="tag-chip" onclick="this.classList.toggle('on');updateSeason()">${s}季</span>`).join('');
 
-  document.getElementById('gCategory').innerHTML = CATEGORIES.map(c=>`<option value="${c.id}">${c.emoji} ${c.name}</option>`).join('');
-  document.getElementById('colorOptions').innerHTML = COLORS.map(c=>`<div class="color-dot" style="background:${c.hex}" title="${c.name}" onclick="selectColor(this,'${c.name}')"></div>`).join('');
-  document.getElementById('seasonOptions').innerHTML = SEASONS.map(s=>`<span class="season-chip" onclick="toggleSeason(this,'${s}')">${s}季</span>`).join('');
-
-  if (gid) {
-    const g = goods.find(x=>x.id===gid);
+  if (id) {
+    const g = goods.find(x=>x.id===id);
     if (!g) return;
-    document.getElementById('modalTitle').textContent = '✏️ 编辑商品';
-    document.getElementById('gId').value = g.id;
     document.getElementById('gName').value = g.name;
     document.getElementById('gCategory').value = g.category;
     document.getElementById('gPrice').value = g.price||'';
     document.getElementById('gNotes').value = g.notes||'';
-    document.getElementById('gColor').value = g.color||'';
-    document.getElementById('gSeason').value = JSON.stringify(g.season||[]);
-    if (g.image) { document.getElementById('gImage').value=g.image; showPreview(g.image); }
-    document.getElementById('gFeatured').checked = g.featured || false;
-    if (g.color) document.querySelectorAll('#colorOptions .color-dot').forEach(d=>d.classList.toggle('selected', d.title===g.color));
-    (g.season||[]).forEach(s => document.querySelectorAll('#seasonOptions .season-chip').forEach(c=>{if(c.textContent===s+'季')c.classList.add('selected');}));
+    document.getElementById('gFeatured').value = g.featured||false;
+    editImages = g.images||[];
+    if (!editImages.length && g.image) editImages = [g.image];
+    document.querySelectorAll('#seasonTags .tag-chip').forEach(el => {
+      if ((g.season||[]).includes(el.textContent.replace('季',''))) el.classList.add('on');
+    });
   } else {
-    document.getElementById('modalTitle').textContent = '➕ 添加商品';
-    document.getElementById('gName').value=''; document.getElementById('gPrice').value='';
-    document.getElementById('gNotes').value=''; document.getElementById('gColor').value='';
-    document.getElementById('gSeason').value='[]'; document.getElementById('gFeatured').checked = false;
+    document.getElementById('gName').value = '';
+    document.getElementById('gPrice').value = '';
+    document.getElementById('gNotes').value = '';
+    document.getElementById('gFeatured').value = 'false';
+    editImages = [];
+    document.querySelectorAll('#seasonTags .tag-chip').forEach(el => el.classList.remove('on'));
   }
+  updateSeason();
+  renderImages();
   document.getElementById('modalOverlay').style.display = 'flex';
 }
 
@@ -474,70 +294,75 @@ function closeModal(e) {
   document.getElementById('modalOverlay').style.display = 'none';
 }
 
-function selectColor(el, cn) {
-  document.querySelectorAll('#colorOptions .color-dot').forEach(d=>d.classList.remove('selected'));
-  el.classList.add('selected'); document.getElementById('gColor').value = cn;
+// ============ 图片 ============
+function chooseImages() {
+  if (editImages.length >= 9) { toast('最多9张'); return; }
+  document.getElementById('fileInput').click();
 }
 
-function toggleSeason(el, s) {
-  el.classList.toggle('selected');
-  const arr = JSON.parse(document.getElementById('gSeason').value||'[]');
-  const idx = arr.indexOf(s);
-  if (idx>-1) arr.splice(idx,1); else arr.push(s);
-  document.getElementById('gSeason').value = JSON.stringify(arr);
+function handleFiles(input) {
+  const files = Array.from(input.files).slice(0, 9 - editImages.length);
+  files.forEach(file => {
+    if (file.size > 5*1024*1024) { toast('图片太大'); return; }
+    const reader = new FileReader();
+    reader.onload = e => { editImages.push(e.target.result); renderImages(); };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
 }
 
-// ============ 保存/删除 ============
-async function saveGoods(e) {
+function removeImage(i) { editImages.splice(i,1); renderImages(); }
+
+function renderImages() {
+  document.getElementById('imgCount').textContent = editImages.length;
+  const grid = document.getElementById('imgGrid');
+  grid.innerHTML = editImages.map((src,i) => `
+    <div class="img-cell"><img src="${src}"><div class="del" onclick="removeImage(${i})">✕</div></div>
+  `).join('') + (editImages.length<9?`<div class="img-add" onclick="chooseImages()">+</div>`:'');
+}
+
+// ============ 保存 ============
+function updateSeason() {
+  const s = Array.from(document.querySelectorAll('#seasonTags .tag-chip.on')).map(el=>el.textContent.replace('季',''));
+  document.getElementById('gSeason').value = JSON.stringify(s);
+}
+
+async function save(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  btn.disabled = true; btn.textContent = '保存中...';
-
+  updateSeason();
   const id = document.getElementById('gId').value;
   const payload = {
     name: document.getElementById('gName').value.trim(),
     category: document.getElementById('gCategory').value,
     price: parseFloat(document.getElementById('gPrice').value)||0,
-    color: document.getElementById('gColor').value,
-    season: JSON.parse(document.getElementById('gSeason').value||'[]'),
     notes: document.getElementById('gNotes').value.trim(),
-    image: document.getElementById('gImage').value,
-    featured: document.getElementById('gFeatured').checked,
+    season: JSON.parse(document.getElementById('gSeason').value||'[]'),
+    images: editImages,
+    image: editImages.length>0?editImages[0]:'',
+    featured: document.getElementById('gFeatured').value==='true'
   };
-
-  if (!payload.name) { toast('⚠️ 请输入商品名称'); btn.disabled=false; btn.textContent='💾 保存'; return; }
+  if (!payload.name) { toast('请输入名称'); return; }
 
   if (id) {
-    const { error } = await sb.from('goods').update(payload).eq('id', id);
-    if (error) { toast('❌ 更新失败: ' + error.message); btn.disabled=false; btn.textContent='💾 保存'; return; }
-    toast('✅ 已更新');
+    await sb.from('goods').update(payload).eq('id',id);
+    toast('已更新');
   } else {
-    const { error } = await sb.from('goods').insert([payload]);
-    if (error) { toast('❌ 保存失败: ' + error.message); btn.disabled=false; btn.textContent='💾 保存'; return; }
-    toast('✅ 已上架到云端');
+    await sb.from('goods').insert([{...payload, created_at:new Date().toISOString()}]);
+    toast('已上架');
   }
-  document.getElementById('modalOverlay').style.display = 'none';
-  btn.disabled = false; btn.textContent = '💾 保存';
-  loadGoods();
-}
-
-async function deleteGoods(gid) {
-  const g = goods.find(x=>x.id===gid);
-  if (!g) return;
-  if (!confirm(`确定删除「${g.name}」吗？`)) return;
-  const { error } = await sb.from('goods').delete().eq('id', gid);
-  if (error) { toast('❌ 删除失败: ' + error.message); return; }
-  toast('🗑 已删除');
+  closeModal();
   loadGoods();
 }
 
 function toast(msg) {
-  const c=document.getElementById('toastContainer');
-  const el=document.createElement('div'); el.className='toast'; el.textContent=msg;
-  c.appendChild(el); setTimeout(()=>el.remove(),2200);
+  const c = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast'; el.textContent = msg;
+  c.appendChild(el);
+  setTimeout(()=>el.remove(),2200);
 }
 
-document.addEventListener('keydown', e => { if (e.key==='Escape') { closeModal(); closeSettings(); } });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 </script>
 </body>
 </html>
