@@ -2,194 +2,147 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jiayi Store - 精选女装</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>佳一女装</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-:root { --pink: #e91e63; --pink-light: #fce4ec; --pink-dark: #c2185b; --bg: #fafafa; --card-bg: #fff; --text: #333; --text-light: #999; --border: #eee; --shadow: 0 2px 12px rgba(0,0,0,0.06); --radius: 12px; }
-body { font-family: 'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--pink:#e91e63;--bg:#f2f2f2;--card:#fff;--text:#333;--muted:#999;--border:#eee}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;max-width:600px;margin:0 auto}
 
-.header { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
-.header-inner { max-width:1280px; margin:0 auto; padding:0 24px; display:flex; align-items:center; height:64px; gap:20px; }
-.logo { font-size:22px; font-weight:700; cursor:pointer; }
-.logo span { font-size:26px; }
-.search-box { flex:1; max-width:400px; position:relative; }
-.search-box input { width:100%; height:40px; border:2px solid var(--border); border-radius:20px; padding:0 44px 0 18px; font-size:14px; outline:none; transition:border .2s; background:#f9f9f9; }
-.search-box input:focus { border-color:var(--pink); background:#fff; }
-.search-box .s-icon { position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:16px; pointer-events:none; }
-.btn { padding:9px 20px; border-radius:20px; border:none; font-size:13px; cursor:pointer; font-weight:600; transition:all .2s; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
-.btn-outline { background:#fff; color:var(--pink); border:2px solid var(--pink); }
-.btn-outline:hover { background:var(--pink-light); }
-.btn-primary { background:var(--pink); color:#fff; }
-.btn-primary:hover { background:var(--pink-dark); }
+.header{padding:16rpx 24rpx;background:var(--card);display:flex;align-items:center;gap:16rpx}
+.search-box{flex:1;display:flex;align-items:center;position:relative}
+.search-box input{width:100%;height:64rpx;border:none;border-radius:32rpx;padding:0 56rpx 0 28rpx;font-size:26rpx;background:#f5f5f5;outline:none}
+.search-icon{position:absolute;right:20rpx;font-size:28rpx}
 
-.cat-bar { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:64px; z-index:99; }
-.cat-inner { max-width:1280px; margin:0 auto; padding:0 24px; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; }
-.cat-inner::-webkit-scrollbar { display:none; }
-.cat-tag { padding:12px 20px; font-size:14px; cursor:pointer; border:none; background:none; white-space:nowrap; border-bottom:3px solid transparent; color:var(--text-light); transition:all .2s; font-weight:500; }
-.cat-tag:hover { color:var(--pink); }
-.cat-tag.active { color:var(--pink); border-bottom-color:var(--pink); font-weight:700; }
-.cat-count { font-size:11px; background:var(--border); color:var(--text-light); padding:2px 7px; border-radius:10px; margin-left:6px; }
-.cat-tag.active .cat-count { background:var(--pink-light); color:var(--pink); }
+.cat-bar{white-space:nowrap;background:var(--card);padding:14rpx 24rpx;border-bottom:1rpx solid #f0f0f0;overflow-x:auto;scrollbar-width:none}
+.cat-bar::-webkit-scrollbar{display:none}
+.cat-tag{display:inline-block;padding:10rpx 20rpx;font-size:24rpx;color:#666;margin-right:8rpx;border-radius:20rpx;background:#f5f5f5;cursor:pointer;user-select:none}
+.cat-tag.active{color:#fff;background:var(--pink);font-weight:600}
 
-.filter-bar { max-width:1280px; margin:0 auto; padding:16px 24px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-.filter-label { font-size:13px; color:var(--text-light); font-weight:600; }
-.filter-toggle { font-size:14px; cursor:pointer; background:none; border:none; color:var(--text-light); padding:4px 8px; border-radius:6px; transition:all .2s; display:flex; align-items:center; gap:4px; }
-.filter-toggle:hover { color:var(--pink); background:var(--pink-light); }
-.filter-toggle .arrow { transition:transform .3s; display:inline-block; }
-.filter-bar.collapsed .filter-chips, .filter-bar.collapsed .filter-label:nth-child(3), .filter-bar.collapsed span[style] { display:none; }
-.filter-bar.collapsed .filter-toggle .arrow { transform:rotate(90deg); }
-.filter-chips { display:flex; gap:8px; flex-wrap:wrap; }
-.chip { padding:6px 14px; border-radius:16px; font-size:13px; cursor:pointer; border:1.5px solid var(--border); background:#fff; transition:all .2s; }
-.chip:hover { border-color:var(--pink); color:var(--pink); }
-.chip.active { background:var(--pink); color:#fff; border-color:var(--pink); }
-.chip-color { display:inline-block; width:14px; height:14px; border-radius:50%; margin-right:4px; vertical-align:middle; border:1px solid #ddd; }
+.filter-bar{background:var(--card);padding:0 24rpx}
+.filter-title{padding:18rpx 0;font-size:24rpx;color:var(--muted);display:flex;align-items:center;gap:6rpx;cursor:pointer}
+.filter-title .arr{transition:transform .3s}
+.filter-title .arr.open{transform:rotate(90deg)}
+.filter-body{padding-bottom:14rpx}
+.filter-row{white-space:nowrap;margin-bottom:10rpx;overflow-x:auto;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;gap:6rpx;padding:8rpx 20rpx;border-radius:20rpx;font-size:22rpx;margin-right:10rpx;background:#f5f5f5;cursor:pointer;user-select:none}
+.chip.active{background:var(--pink);color:#fff}
 
-.main { max-width:1280px; margin:0 auto; padding:0 24px 40px; }
-.grid { display:flex; flex-wrap:wrap; gap:20px; }
-.card { width:calc(25% - 15px); background:var(--card-bg); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:all .3s; cursor:pointer; }
-.card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,0.1); }
-.card-img { width:100%; position:relative; overflow:hidden; background:#f5f5f5; }
-.card-img img { width:100%; height:auto; display:block; }
-.card:hover .card-img img { transform:scale(1.02); }
-.card-img .placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:72px; }
-.card-badge { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); color:#fff; font-size:11px; padding:4px 10px; border-radius:10px; font-weight:600; }
-.card-body { padding:14px; flex:1; display:flex; flex-direction:column; }
-.card-name { font-size:15px; font-weight:600; margin-bottom:6px; line-height:1.4; }
-.card-meta { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px; }
-.card-tag { font-size:11px; background:#f5f5f5; padding:3px 8px; border-radius:8px; color:var(--text-light); }
-.card-notes { font-size:12px; color:var(--text-light); line-height:1.5; flex:1; }
-.card-footer { display:flex; justify-content:space-between; align-items:center; padding-top:8px; border-top:1px solid var(--border); margin-top:auto; }
-.card-price { font-size:18px; font-weight:700; color:var(--pink); }
-.card-cart-btn { width:32px; height:32px; border-radius:50%; border:1px solid var(--border); background:#fff; cursor:pointer; font-size:16px; transition:all .2s; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.card-cart-btn:hover { background:var(--pink); border-color:var(--pink); color:#fff; }
+.main{padding:12rpx 12rpx 40rpx}
+.count-text{font-size:22rpx;color:var(--muted);padding:8rpx 8rpx 12rpx}
+.grid{display:flex;flex-wrap:wrap;gap:12rpx}
+.card{width:calc(50% - 6rpx);background:var(--card);border-radius:12rpx;overflow:hidden;cursor:pointer}
+.card-img{width:100%;height:340rpx;overflow:hidden;position:relative;background:#f5f5f5}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64rpx}
+.card-body{padding:14rpx 16rpx 16rpx}
+.card-name{font-size:26rpx;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:6rpx}
+.card-meta{display:flex;gap:6rpx;margin-bottom:10rpx;flex-wrap:wrap}
+.card-meta .tag{font-size:20rpx;color:var(--pink);padding:2rpx 8rpx;border:1rpx solid #fce4ec;border-radius:6rpx}
+.card-footer{display:flex;justify-content:space-between;align-items:center}
+.price{font-size:32rpx;font-weight:700;color:var(--pink)}
+.cart-btn{width:52rpx;height:52rpx;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24rpx;cursor:pointer;border:none}
 
-.detail-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:200; display:flex; align-items:center; justify-content:center; animation:fadeIn .2s; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-.detail-modal { background:#fff; border-radius:16px; width:90%; max-width:600px; max-height:90vh; overflow-y:auto; animation:slideUp .25s; }
-@keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
-.detail-img { width:100%; aspect-ratio:4/3; background:#f5f5f5; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
-.detail-img img { width:100%; height:100%; object-fit:contain; }
-.detail-img .placeholder { font-size:100px; }
-.detail-close { position:absolute; top:16px; right:16px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; border:none; font-size:20px; cursor:pointer; z-index:10; display:flex; align-items:center; justify-content:center; }
-.detail-body { padding:24px; }
-.detail-name { font-size:22px; font-weight:700; margin-bottom:8px; }
-.detail-price { font-size:28px; font-weight:700; color:var(--pink); margin-bottom:16px; }
-.detail-info { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-.detail-info .card-tag { font-size:13px; padding:5px 12px; }
-.detail-notes { font-size:14px; color:#666; line-height:1.8; background:#fafafa; padding:14px; border-radius:10px; }
+.empty{text-align:center;padding:120rpx;color:var(--muted);font-size:28rpx}
+.admin-link{text-align:center;padding:40rpx;font-size:22rpx;color:#ddd;cursor:pointer}
 
-.rec-panel { position:fixed; right:-420px; top:0; bottom:0; width:400px; background:#fff; z-index:150; box-shadow:-4px 0 20px rgba(0,0,0,0.1); transition:right .3s; display:flex; flex-direction:column; }
-.rec-panel.open { right:0; }
-.rec-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:149; display:none; }
-.rec-backdrop.show { display:block; }
-.rec-header { padding:20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-.rec-header h3 { font-size:18px; }
-.rec-close { width:34px; height:34px; border-radius:50%; border:none; background:#f5f5f5; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; }
-.rec-body { flex:1; overflow-y:auto; padding:20px; }
-.rec-item { display:flex; gap:14px; padding:12px; border-radius:12px; margin-bottom:10px; background:#fafafa; align-items:center; }
-.rec-item-img { width:56px; height:56px; border-radius:10px; overflow:hidden; background:#f0f0f0; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:28px; }
-.rec-item-img img { width:100%; height:100%; object-fit:cover; }
-.rec-item-info { flex:1; }
-.rec-item-name { font-weight:600; font-size:14px; }
-.rec-item-cat { font-size:12px; color:var(--text-light); }
-.rec-item-price { font-size:14px; color:var(--pink); font-weight:700; }
-.rec-footer { padding:20px; border-top:1px solid var(--border); }
-.rec-total { font-size:20px; font-weight:700; color:var(--pink); text-align:center; margin-bottom:12px; }
+/* 详情 */
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;display:none}
+.detail-overlay.on{display:flex}
+.detail-modal{background:var(--card);border-radius:16rpx;width:95%;max-height:90vh;overflow-y:auto}
+.detail-img{width:100%;aspect-ratio:4/3;background:#f5f5f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.detail-img img{width:100%;height:100%;object-fit:contain}
+.detail-close{position:absolute;top:16rpx;right:16rpx;width:36rpx;height:36rpx;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:20rpx;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.detail-body{padding:24rpx}
+.detail-price{font-size:48rpx;font-weight:700;color:var(--pink);margin-bottom:8rpx}
+.detail-name{font-size:32rpx;font-weight:600;line-height:1.5;margin-bottom:16rpx}
+.detail-meta{display:flex;gap:12rpx;flex-wrap:wrap;margin-bottom:16rpx}
+.detail-meta .tag{font-size:24rpx;background:#f5f5f5;padding:8rpx 18rpx;border-radius:16rpx;color:var(--muted)}
+.detail-notes{font-size:28rpx;color:#666;line-height:1.8;background:#fafafa;padding:24rpx;border-radius:12rpx;margin-bottom:16rpx}
+.detail-act{display:flex;gap:16rpx}
+.detail-act button{flex:1;border-radius:40rpx;font-size:28rpx;padding:20rpx;border:none;cursor:pointer;font-weight:600}
+.add-cart{background:var(--pink);color:#fff}
+.go-cart{background:#fff;color:var(--pink);border:2rpx solid var(--pink)}
 
 /* 购物车面板 */
-.cart-panel { position:fixed { text-align:center; padding:60px 20px; color:var(--text-light); }
-.empty .empty-icon { font-size:64px; margin-bottom:16px; }
-.empty h3 { font-size:18px; margin-bottom:8px; color:#666; }
+.cart-panel{position:fixed;top:0;right:-100%;width:100%;max-width:400px;bottom:0;background:var(--card);z-index:150;transition:right .3s;display:flex;flex-direction:column}
+.cart-panel.open{right:0}
+.cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:149;display:none}
+.cart-backdrop.on{display:block}
+.cart-head{padding:20rpx;border-bottom:1rpx solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-close{width:34rpx;height:34rpx;border-radius:50%;border:none;background:#f5f5f5;cursor:pointer;font-size:18rpx}
+.cart-body{flex:1;overflow-y:auto;padding:20rpx}
+.cart-item{display:flex;gap:14rpx;padding:12rpx;border-radius:12rpx;margin-bottom:10rpx;background:#fafafa;align-items:center}
+.cart-item-img{width:56rpx;height:56rpx;border-radius:10rpx;overflow:hidden;background:#f0f0f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28rpx}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1}
+.cart-item-name{font-weight:600;font-size:14px}
+.cart-item-row{display:flex;align-items:center;gap:8rpx;margin-top:6rpx}
+.cart-qty-btn{padding:2rpx 8rpx;border:1rpx solid var(--border);border-radius:20rpx;cursor:pointer;background:#fff;font-size:14rpx}
+.cart-item-price{margin-left:auto;font-weight:700;color:var(--pink)}
+.cart-foot{padding:20rpx;border-top:1rpx solid var(--border)}
+.cart-total{font-size:20rpx;font-weight:700;color:var(--pink);text-align:center;margin-bottom:12rpx}
 
-/* 骨架屏 */
-.skeleton { background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
-.skeleton .sk-img { width:100%; aspect-ratio:3/4; background:linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; }
-.skeleton .sk-body { padding:14px; }
-.skeleton .sk-line { height:14px; border-radius:7px; background:linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; margin-bottom:10px; }
-.skeleton .sk-line.short { width:60%; }
-@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:24px; font-size:14px; z-index:999; animation:toastIn .3s, toastOut .3s 1.8s forwards; }
-@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(-10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
-@keyframes toastOut { from{opacity:1} to{opacity:0;transform:translateX(-50%) translateY(-10px)} }
-.footer { text-align:center; padding:20px; color:var(--text-light); font-size:12px; border-top:1px solid var(--border); margin-top:20px; }
+.btn{padding:9rpx 20rpx;border-radius:20rpx;border:none;font-size:13rpx;cursor:pointer;font-weight:600}
+.btn-primary{background:var(--pink);color:#fff;width:100%;padding:14rpx}
+.btn-outline{background:#fff;color:var(--pink);border:2rpx solid var(--pink)}
 
-@media (max-width:768px) {
-  .header-inner { padding:0 12px; gap:8px; } .logo { font-size:17px; } .search-box { max-width:160px; }
-  .grid { gap:10px; }
-  .card { width:calc(50% - 5px); }
-  .card-img .placeholder { font-size:48px; }
-  .filter-bar { padding:12px; } .cat-tag { padding:10px 14px; font-size:13px; } .rec-panel { width:100%; right:-100%; }
-  .detail-modal { max-width:95%; }
-  .main { padding:0 12px 24px; }
-}
+.toast{position:fixed;top:20rpx;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12rpx 24rpx;border-radius:24rpx;font-size:14rpx;z-index:999;animation:in .3s}
+@keyframes in{from{opacity:0}}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <div class="logo" onclick="resetAll()"><span>🛍️</span> Jiayi Store</div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="搜索喜欢的衣服..." oninput="renderGoods()">
-      <span class="s-icon">🔍</span>
-    </div>
-    <div class="header-actions">
-      <button class="btn btn-outline" onclick="openCart()" style="position:relative;">🛒<span id="cartBadge" style="position:absolute;top:-6px;right:-6px;background:var(--pink);color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:9px;display:none;align-items:center;justify-content:center;">0</span></button>
-    </div>
+<div class="header">
+  <div class="search-box">
+    <input placeholder="搜索衣服..." oninput="filter()">
+    <span class="search-icon">🔍</span>
   </div>
-</header>
-
-<nav class="cat-bar"><div class="cat-inner" id="catBar"></div></nav>
-
-<div class="filter-bar" id="filterBar">
-  <button class="filter-toggle" onclick="toggleFilter()" title="收起/展开筛选"><span class="arrow">🔻</span></button>
-  <div class="filter-chips" id="seasonFilters"></div>
-  <span style="color:var(--border);margin:0 2px;">│</span>
-  <div class="filter-chips" id="colorFilters"></div>
-  <span id="resultCount" style="margin-left:auto;font-size:13px;color:var(--text-light);"></span>
+  <button class="btn btn-outline" onclick="openCart()" style="position:relative">🛒<span id="cartBadge" style="position:absolute;top:-6rpx;right:-6rpx;background:var(--pink);color:#fff;font-size:10rpx;min-width:18rpx;height:18rpx;border-radius:9rpx;display:none">0</span></button>
 </div>
 
-<main class="main">
-  <div class="grid" id="goodsGrid">
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-    <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div>
-  </div>
-  <div class="empty" id="emptyState" style="display:none;">
-    <div class="empty-icon">📭</div><h3>暂未上架</h3><p>店家正在准备新品，敬请期待～</p>
-  </div>
-</main>
+<div class="cat-bar" id="catBar"></div>
 
-<div class="footer">© 2026 Jiayi Store · 精选好物</div>
+<div class="filter-bar">
+  <div class="filter-title" onclick="toggleFilter()">🔻 筛选<span class="arr" id="filterArr">▾</span></div>
+  <div class="filter-body" id="filterBody" style="display:none">
+    <div class="filter-row" id="seasonRow"></div>
+  </div>
+</div>
 
-<!-- 详情弹窗 -->
-<div class="detail-overlay" id="detailOverlay" style="display:none;" onclick="closeDetail(event)">
+<div class="main">
+  <div class="count-text" id="countText"></div>
+  <div class="grid" id="goodsGrid"></div>
+  <div class="empty" id="emptyState" style="display:none">📭 暂无商品</div>
+  <div class="admin-link" id="adminLink" style="display:none" onclick="location.href='admin.html'">⚙️ 管理</div>
+</div>
+
+<!-- 详情 -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail()">
   <div class="detail-modal" onclick="event.stopPropagation()">
-    <button class="detail-close" onclick="closeDetail()">✕</button>
     <div class="detail-img" id="detailImg"></div>
     <div class="detail-body">
-      <div class="detail-name" id="detailName"></div>
       <div class="detail-price" id="detailPrice"></div>
-      <div class="detail-info" id="detailInfo"></div>
+      <div class="detail-name" id="detailName"></div>
+      <div class="detail-meta" id="detailMeta"></div>
       <div class="detail-notes" id="detailNotes"></div>
-      <button class="btn btn-primary" id="detailCartBtn" style="width:100%;margin-top:16px;" onclick="addToCartFromDetail()">🛒 加入购物车</button>
+      <div class="detail-act">
+        <button class="add-cart" onclick="detailAddCart()">🛒 加入购物车</button>
+        <button class="go-cart" onclick="openCart()">去购物车</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- 购物车面板 -->
-<div class="rec-backdrop" id="cartBackdrop" onclick="closeCart()"></div>
-<div class="rec-panel" id="cartPanel">
-  <div class="rec-header"><h3>🛒 购物车</h3><button class="rec-close" onclick="closeCart()">✕</button></div>
-  <div class="rec-body" id="cartBody" style="text-align:center;color:var(--text-light);padding-top:40px;">🛒 购物车是空的</div>
-  <div class="rec-footer" id="cartFooter" style="display:none;">
-    <div class="rec-total" id="cartTotal"></div>
-    <button class="btn btn-primary" style="width:100%;margin-bottom:8px;" onclick="sendOrder()">💬 发给商家下单</button>
-    <button class="btn btn-outline btn-sm" style="width:100%;" onclick="clearCart()">🗑 清空购物车</button>
+<!-- 购物车 -->
+<div class="cart-backdrop" id="cartBack" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head"><h3>🛒 购物车</h3><button class="cart-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total" id="cartTotal"></div>
+    <button class="btn btn-primary" onclick="sendOrder()">📋 复制订单发给商家</button>
   </div>
 </div>
 
@@ -197,245 +150,126 @@ body { font-family: 'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-// ============ Supabase ============
-const sb = supabase.createClient(
-  'https://rixhfnacmselwjtlaohn.supabase.co',
-  'sb_publishable_mlPbrrg5TdAq6wh8RZ8CNA_sid5pubv'
-);
+const sb = supabase.createClient('https://rixhfnacmselwjtlaohn.supabase.co','sb_publishable_mlPbrrg5TdAq6wh8RZ8CNA_sid5pubv');
 
-const CATEGORIES = [
-  { id:'top', name:'上衣', emoji:'👕', colors:['#fff5f5','#fce4ec'] },
-  { id:'pants', name:'裤子', emoji:'👖', colors:['#e3f2fd','#bbdefb'] },
-  { id:'skirt', name:'裙子', emoji:'👗', colors:['#fce4ec','#f8bbd0'] },
-  { id:'outer', name:'外套', emoji:'🧥', colors:['#efebe9','#d7ccc8'] },
-  { id:'dress', name:'连衣裙', emoji:'👘', colors:['#f3e5f5','#e1bee7'] },
-  { id:'shoes', name:'鞋子', emoji:'👟', colors:['#e8f5e9','#c8e6c9'] },
-  { id:'acc', name:'配饰', emoji:'👜', colors:['#fff8e1','#ffecb3'] },
-  { id:'sport', name:'运动装', emoji:'🎽', colors:['#e0f7fa','#b2ebf2'] },
-];
-const COLORS = [
-  { name:'黑色', hex:'#333' },{ name:'白色', hex:'#fff' },{ name:'红色', hex:'#e53935' },
-  { name:'蓝色', hex:'#1e88e5' },{ name:'绿色', hex:'#43a047' },{ name:'黄色', hex:'#fdd835' },
-  { name:'粉色', hex:'#ec407a' },{ name:'灰色', hex:'#9e9e9e' },{ name:'棕色', hex:'#795548' },
-  { name:'紫色', hex:'#8e24aa' },{ name:'橙色', hex:'#fb8c00' },{ name:'米色', hex:'#f5deb3' },
-];
-const SEASONS = ['春','夏','秋','冬'];
+const CATS=[{id:'top',n:'上衣',e:'👕'},{id:'pants',n:'裤子',e:'👖'},{id:'skirt',n:'裙子',e:'👗'},{id:'outer',n:'外套',e:'🧥'},{id:'dress',n:'连衣裙',e:'👘'},{id:'shoes',n:'鞋子',e:'👟'},{id:'acc',n:'配饰',e:'👜'},{id:'sport',n:'运动装',e:'🎽'}];
+const SEASONS=['春','夏','秋','冬'];
+const cm=Object.fromEntries(CATS.map(c=>[c.id,c.n]));
 
-let goods = [], currentCat='all', seasonFilter='', colorFilter='';
+let goods=[],currentCat='all',seasonFilter='',cart=[],detailId=null;
 
-// ============ 加载（缓存加速） ============
-const CACHE_KEY = 'jiayi_goods_cache';
+function loadCart(){try{cart=JSON.parse(localStorage.getItem('jiayi_cart')||'[]')}catch(e){cart=[]}updateBadge()}
+function saveCart(){localStorage.setItem('jiayi_cart',JSON.stringify(cart));updateBadge()}
+function updateBadge(){const n=cart.reduce((s,i)=>s+i.qty,0);const b=document.getElementById('cartBadge');if(n>0){b.style.display='flex';b.textContent=n}else b.style.display='none'}
 
-// 先渲染缓存，再从云端拉最新数据
-function loadFromCache() {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (raw) { goods = JSON.parse(raw); renderAll(); return true; }
-  } catch(e) {}
-  return false;
+async function load(){
+  const{data}=await sb.from('goods').select('id,name,category,price,season,notes,image,images').order('created_at',{ascending:false});
+  goods=data||[];render()
 }
 
-async function loadGoods() {
-  // 首次：显示缓存内容
-  if (!goods.length) loadFromCache();
-
-  try {
-    const { data, error } = await sb.from('goods').select('*').order('created_at', { ascending: false });
-    if (error) { console.error('加载失败:', error); return; }
-    goods = data || [];
-    // 写缓存
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify(goods)); } catch(e) {}
-    renderAll();
-  } catch(e) { console.error('网络错误:', e); }
+function render(){
+  renderCats();renderSeasons();renderGoods();
+  document.getElementById('adminLink').style.display=localStorage.getItem('admin_pwd')?'block':'none';
 }
 
-function renderAll() { renderCatBar(); renderFilters(); renderGoods(); }
-
-function renderCatBar() {
-  const counts = {};
-  goods.forEach(g=>{counts[g.category]=(counts[g.category]||0)+1;});
-  let html = `<button class="cat-tag${currentCat==='all'?' active':''}" onclick="setCategory('all')">🔥 全部<span class="cat-count">${goods.length}</span></button>`;
-  CATEGORIES.forEach(c=>{html+=`<button class="cat-tag${currentCat===c.id?' active':''}" onclick="setCategory('${c.id}')">${c.emoji} ${c.name}<span class="cat-count">${counts[c.id]||0}</span></button>`;});
-  document.getElementById('catBar').innerHTML=html;
+function renderCats(){
+  const cnt={};goods.forEach(g=>{cnt[g.category]=(cnt[g.category]||0)+1});
+  let h=`<span class="cat-tag ${currentCat==='all'?'active':''}" onclick="setCat('all')">全部(${goods.length})</span>`;
+  CATS.forEach(c=>h+=`<span class="cat-tag ${currentCat===c.id?'active':''}" onclick="setCat('${c.id}')">${c.e} ${c.n}(${cnt[c.id]||0})</span>`);
+  document.getElementById('catBar').innerHTML=h;
 }
 
-function renderFilters() {
-  document.getElementById('seasonFilters').innerHTML = SEASONS.map(s=>`<span class="chip${seasonFilter===s?' active':''}" onclick="setSeasonFilter('${s}')">${seasonFilter===s?'✓ ':''}${s}季</span>`).join('');
-  document.getElementById('colorFilters').innerHTML = COLORS.map(c=>`<span class="chip${colorFilter===c.name?' active':''}" onclick="setColorFilter('${c.name}')"><span class="chip-color" style="background:${c.hex}"></span>${c.name}</span>`).join('');
+function renderSeasons(){
+  document.getElementById('seasonRow').innerHTML=SEASONS.map(s=>`<span class="chip ${seasonFilter===s?'active':''}" onclick="setSeason('${s}')">${s}季</span>`).join('');
 }
 
-function renderGoods() {
-  const s=document.getElementById('searchInput').value.toLowerCase().trim();
+function renderGoods(){
   let f=goods;
-  if(currentCat!=='all') f=f.filter(g=>g.category===currentCat);
-  if(s) f=f.filter(g=>g.name.toLowerCase().includes(s));
-  if(seasonFilter) f=f.filter(g=>(g.season||[]).includes(seasonFilter));
-  if(colorFilter) f=f.filter(g=>g.color===colorFilter);
-
-  document.getElementById('resultCount').textContent=`共 ${f.length} 件`;
-  const grid=document.getElementById('goodsGrid'), empty=document.getElementById('emptyState');
-  if(!f.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-
+  if(currentCat!=='all')f=f.filter(g=>g.category===currentCat);
+  if(seasonFilter)f=f.filter(g=>(g.season||[]).includes(seasonFilter));
+  const kw=document.querySelector('.search-box input').value.trim().toLowerCase();
+  if(kw)f=f.filter(g=>g.name.toLowerCase().includes(kw));
+  document.getElementById('countText').textContent='共 '+f.length+' 件';
+  const grid=document.getElementById('goodsGrid');
+  if(!f.length){grid.innerHTML='';document.getElementById('emptyState').style.display='block';return}
+  document.getElementById('emptyState').style.display='none';
   grid.innerHTML=f.map(g=>{
-    const cat=getCat(g.category);
-    const img=g.image?`<img src="${g.image}" alt="${esc(g.name)}" loading="lazy">`:`<div class="placeholder" style="background:linear-gradient(135deg, ${cat?cat.colors[0]:'#f5f5f5'} 0%, ${cat?cat.colors[1]:'#eee'} 100%);">${cat?cat.emoji:'👔'}</div>`;
+    const img=g.images&&g.images.length?g.images[0]:g.image||'';
     return `<div class="card" onclick="openDetail('${g.id}')">
-      <div class="card-img">${img}<span class="card-badge">${cat?cat.name:g.category}</span></div>
+      <div class="card-img">${img?`<img src="${img}">`:`<div class="ph">${CATS.find(c=>c.id===g.category)?.e||'👔'}</div>`}</div>
       <div class="card-body">
         <div class="card-name">${esc(g.name)}</div>
-        <div class="card-meta">${(g.season||[]).map(s=>`<span class="card-tag">🌤 ${s}季</span>`).join('')}${g.color?`<span class="card-tag">🎨 ${g.color}</span>`:''}</div>
-        ${g.notes?`<div class="card-notes">${esc(g.notes).slice(0,36)}${g.notes.length>36?'...':''}</div>`:''}
-        <div class="card-footer">
-          <div class="card-price">¥${g.price||'--'}</div>
-          <button class="card-cart-btn" onclick="event.stopPropagation();addToCart('${g.id}')" title="加入购物车">🛒</button>
-        </div>
+        <div class="card-meta">${(g.season||[]).map(s=>`<span class="tag">${s}季</span>`).join('')}</div>
+        <div class="card-footer"><span class="price">¥${g.price||'--'}</span><button class="cart-btn" onclick="event.stopPropagation();addCart('${g.id}')">🛒</button></div>
       </div></div>`;
   }).join('');
 }
 
-function getCat(id){return CATEGORIES.find(c=>c.id===id);}
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
-// ============ 详情 ============
-function openDetail(gid){
-  const g=goods.find(x=>x.id===gid);
-  if(!g)return;
-  const cat=getCat(g.category);
-  document.getElementById('detailImg').innerHTML=g.image?`<img src="${g.image}" alt="${esc(g.name)}">`:`<div class="placeholder" style="background:linear-gradient(135deg, ${cat?cat.colors[0]:'#f5f5f5'} 0%, ${cat?cat.colors[1]:'#eee'} 100%);">${cat?cat.emoji:'👔'}</div>`;
-  document.getElementById('detailName').textContent=g.name;
+function setCat(c){currentCat=c;renderCats();renderGoods()}
+function setSeason(s){seasonFilter=seasonFilter===s?'':s;renderSeasons();renderGoods()}
+function toggleFilter(){const b=document.getElementById('filterBody');const a=document.getElementById('filterArr');b.style.display=b.style.display==='none'?'block':'none';a.classList.toggle('open')}
+function filter(){renderGoods()}
+
+// 详情
+function openDetail(id){
+  const g=goods.find(x=>x.id===id);if(!g)return;detailId=id;
+  const cat=CATS.find(c=>c.id===g.category);
+  const img=g.images&&g.images.length?g.images[0]:g.image||'';
+  document.getElementById('detailImg').innerHTML=img?`<img src="${img}">`:`<div style="font-size:100rpx">${cat?.e||'👔'}</div>`;
   document.getElementById('detailPrice').innerHTML='¥'+(g.price||'--');
-  document.getElementById('detailInfo').innerHTML=`<span class="card-tag">${cat?cat.emoji:'👔'} ${cat?cat.name:g.category}</span>${g.color?`<span class="card-tag">🎨 ${g.color}</span>`:''}${(g.season||[]).map(s=>`<span class="card-tag">🌤 ${s}季</span>`).join('')}`;
+  document.getElementById('detailName').textContent=g.name;
+  document.getElementById('detailMeta').innerHTML=`<span class="tag">${cat?.e||''} ${cat?.n||g.category}</span>${(g.season||[]).map(s=>`<span class="tag">${s}季</span>`).join('')}`;
   document.getElementById('detailNotes').textContent=g.notes||'暂无描述';
-  document.getElementById('detailOverlay').style.display='flex';
-}
-function closeDetail(e){if(e&&e.target!==document.getElementById('detailOverlay'))return;document.getElementById('detailOverlay').style.display='none';}
-
-// ============ 筛选 ============
-function setCategory(c){currentCat=c;renderCatBar();renderGoods();}
-function toggleFilter(){document.getElementById('filterBar').classList.toggle('collapsed');}
-function setSeasonFilter(s){seasonFilter=seasonFilter===s?'':s;renderFilters();renderGoods();}
-function setColorFilter(c){colorFilter=colorFilter===c?'':c;renderFilters();renderGoods();}
-function resetAll(){currentCat='all';seasonFilter='';colorFilter='';document.getElementById('searchInput').value='';renderAll();}
-
-// ============ 购物车 ============
-let cart = [];
-function loadCart(){ try{ cart = JSON.parse(localStorage.getItem('jiayi_cart'))||[]; }catch(e){ cart=[]; } updateCartBadge(); }
-function saveCart(){ localStorage.setItem('jiayi_cart', JSON.stringify(cart)); updateCartBadge(); }
-function updateCartBadge(){
-  const b = document.getElementById('cartBadge');
-  const n = cart.reduce((s,i)=>s+i.qty,0);
-  if(n>0){ b.style.display='flex'; b.textContent=n; }
-  else { b.style.display='none'; }
+  document.getElementById('detailOverlay').classList.add('on');
 }
 
-function addToCart(gid){
-  const g = goods.find(x=>x.id===gid);
-  if(!g) return;
-  const found = cart.find(i=>i.id===gid);
-  if(found) found.qty++;
-  else cart.push({id:g.id, name:g.name, price:g.price, image:g.image, category:g.category, qty:1});
-  saveCart();
-  toast('✅ 已加入购物车');
+function closeDetail(){document.getElementById('detailOverlay').classList.remove('on')}
+function detailAddCart(){if(detailId)addCart(detailId)}
+
+// 购物车
+function addCart(id){
+  const g=goods.find(x=>x.id===id);if(!g)return;
+  const found=cart.find(i=>i.id===id);
+  if(found)found.qty++;else cart.push({id:g.id,name:g.name,price:g.price,images:g.images,image:g.image,category:g.category,qty:1});
+  saveCart();toast('已加入购物车')
 }
 
-function addToCartFromDetail(){
-  const gid = document.getElementById('detailOverlay').dataset.gid;
-  addToCart(gid);
-}
-
-function openCart(){
-  renderCart();
-  document.getElementById('cartPanel').classList.add('open');
-  document.getElementById('cartBackdrop').classList.add('show');
-}
-
-function closeCart(){
-  document.getElementById('cartPanel').classList.remove('open');
-  document.getElementById('cartBackdrop').classList.remove('show');
-}
+function openCart(){renderCart();document.getElementById('cartPanel').classList.add('open');document.getElementById('cartBack').classList.add('on')}
+function closeCart(){document.getElementById('cartPanel').classList.remove('open');document.getElementById('cartBack').classList.remove('on')}
 
 function renderCart(){
-  const body = document.getElementById('cartBody');
-  const footer = document.getElementById('cartFooter');
-  if(!cart.length){
-    body.innerHTML = '<div style="text-align:center;color:var(--text-light);padding-top:40px;">🛒 购物车是空的</div>';
-    footer.style.display = 'none';
-    return;
-  }
-  const cats = CATEGORIES;
-  body.innerHTML = cart.map((item,i) => {
-    const cat = cats.find(c=>c.id===item.category);
-    const img = item.image ? `<img src="${item.image}" alt="">` : (cat?cat.emoji:'👔');
-    return `<div class="rec-item">
-      <div class="rec-item-img">${img}</div>
-      <div class="rec-item-info">
-        <div class="rec-item-name">${esc(item.name)}</div>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
-          <button class="btn btn-outline btn-sm" onclick="changeQty(${i},-1)" style="padding:2px 8px;">-</button>
-          <span style="font-weight:600;">${item.qty}</span>
-          <button class="btn btn-outline btn-sm" onclick="changeQty(${i},1)" style="padding:2px 8px;">+</button>
-          <span style="margin-left:auto;font-weight:700;color:var(--pink);">¥${(item.price*item.qty).toFixed(2)}</span>
+  const body=document.getElementById('cartBody'),foot=document.getElementById('cartFoot');
+  if(!cart.length){body.innerHTML='<div style="text-align:center;padding:40rpx;color:var(--muted)">🛒 购物车是空的</div>';foot.style.display='none';return}
+  body.innerHTML=cart.map((item,i)=>`
+    <div class="cart-item">
+      <div class="cart-item-img">${item.images&&item.images.length?`<img src="${item.images[0]}">`:item.image?`<img src="${item.image}">`:'👔'}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(item.name)}</div>
+        <div class="cart-item-row">
+          <button class="cart-qty-btn" onclick="changeQty(${i},-1)">-</button>
+          <span>${item.qty}</span>
+          <button class="cart-qty-btn" onclick="changeQty(${i},1)">+</button>
+          <span class="cart-item-price">¥${(item.price*item.qty).toFixed(2)}</span>
         </div>
-      </div>
-    </div>`;
-  }).join('');
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById('cartTotal').textContent = `💰 共 ${cart.reduce((s,i)=>s+i.qty,0)} 件 · ¥${total.toFixed(2)}`;
-  footer.style.display = 'block';
+      </div></div>`).join('');
+  document.getElementById('cartTotal').textContent='💰 '+cart.reduce((s,i)=>s+i.qty,0)+'件 · ¥'+cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);
+  foot.style.display='block'
 }
 
-function changeQty(i, d){
-  cart[i].qty += d;
-  if(cart[i].qty <= 0) cart.splice(i,1);
-  saveCart();
-  renderCart();
-}
-
-function clearCart(){
-  if(!confirm('确定清空购物车？')) return;
-  cart = [];
-  saveCart();
-  closeCart();
-}
-
+function changeQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);saveCart();renderCart()}
 function sendOrder(){
-  if(!cart.length) return;
-  let msg = '🛍️ 你好，我想下单：\n\n';
-  cart.forEach((item,i) => msg += `${i+1}. ${item.name} ×${item.qty}  ¥${(item.price*item.qty).toFixed(2)}\n`);
-  msg += `\n💰 共 ¥${cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2)}`;
-
-  const contact = localStorage.getItem('merchant_contact')||'';
-  if(contact){
-    msg += `\n\n📞 请发给商家：${contact}`;
-  }
-
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(msg).then(()=>{
-      if(contact) toast('📋 订单已复制，请粘贴发给：'+contact);
-      else toast('📋 订单已复制，发给商家即可');
-    });
-  } else {
-    prompt('复制以下内容发给商家：', msg);
-  }
+  let m='🛍️ 你好，我想下单：\n\n';
+  cart.forEach((i,k)=>m+=`${k+1}. ${i.name} ×${i.qty} ¥${(i.price*i.qty).toFixed(2)}\n`);
+  m+=`\n💰 共 ¥${cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2)}`;
+  navigator.clipboard.writeText(m).then(()=>toast('订单已复制，发给商家即可'))
 }
 
-function toast(msg){const c=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast';el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),2200);}
+function toast(m){const c=document.getElementById('toastContainer'),e=document.createElement('div');e.className='toast';e.textContent=m;c.appendChild(e);setTimeout(()=>e.remove(),2200)}
 
-// ============ 启动 ============
-loadCart();
-// 第1步：立刻显示缓存（秒开）
-const cacheHit = loadFromCache();
-if (cacheHit) { renderCatBar(); renderFilters(); }
-
-// 第2步：从云端拉最新数据
-loadGoods();
-
-// 第3步：实时订阅
-sb.channel('goods-rt')
-  .on('postgres_changes', { event: '*', schema: 'public', table: 'goods' }, () => loadGoods())
-  .subscribe();
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetail();closeRecommend();closeCart();}if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();document.getElementById('searchInput').focus();}});
+loadCart();load();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetail();closeCart()}});
 </script>
 </body>
 </html>
