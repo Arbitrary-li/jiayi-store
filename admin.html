@@ -7,76 +7,71 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--pink:#e91e63;--bg:#f5f5f5;--card:#fff;--text:#333;--muted:#999;--border:#eee}
-body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text)}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);max-width:500px;margin:0 auto;min-height:100vh}
 
-/* 登录 - 同小程序 */
-.login-wrap{padding:300rpx 80rpx 0;text-align:center;min-height:100vh;background:var(--bg)}
-.login-wrap h1{font-size:48rpx;font-weight:800;margin-bottom:12rpx}
-.login-wrap .sub{font-size:26rpx;color:var(--muted);margin-bottom:48rpx}
-.login-wrap input{background:var(--card);border:2rpx solid #e0e0e0;border-radius:16rpx;padding:28rpx 32rpx;font-size:30rpx;text-align:center;margin-bottom:28rpx;width:100%;outline:none}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:0 30px;text-align:center}
+.login-wrap h1{font-size:32px;font-weight:800;margin-bottom:6px}
+.login-wrap .sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.login-wrap input{width:100%;padding:16px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;text-align:center;outline:none;margin-bottom:20px}
 .login-wrap input:focus{border-color:var(--pink)}
-.login-wrap button{background:linear-gradient(135deg,var(--pink),#c2185b);color:#fff;border-radius:40rpx;font-size:30rpx;padding:20rpx;width:100%;border:none;font-weight:600;box-shadow:0 8rpx 24rpx rgba(233,30,99,.3)}
+.login-wrap button{background:linear-gradient(135deg,var(--pink),#c2185b);color:#fff;border-radius:24px;font-size:16px;padding:14px;width:100%;border:none;font-weight:600;cursor:pointer}
+.login-err{color:#e53935;font-size:13px;margin-bottom:12px;display:none}
 
-.admin-page{display:none;max-width:600px;margin:0 auto;padding-bottom:40rpx}
-
-/* 工具栏 */
-.toolbar{display:flex;align-items:center;padding:20rpx 24rpx;background:var(--card);gap:12rpx;position:sticky;top:0;z-index:10}
-.toolbar-title{font-size:32rpx;font-weight:800;flex:1}
-.tb-btn{padding:12rpx 20rpx;border-radius:24rpx;font-size:24rpx;border:none;font-weight:600;cursor:pointer}
-.tb-primary{background:var(--pink);color:#fff}
-.tb-outline{background:#fff;color:var(--pink);border:2rpx solid var(--pink)}
-.tb-ghost{background:#fff;color:var(--muted);border:2rpx solid var(--border)}
+.admin-page{display:none;padding-bottom:30px}
+.toolbar{display:flex;align-items:center;padding:12px 14px;background:var(--card);gap:8px;position:sticky;top:0;z-index:10;flex-wrap:wrap}
+.toolbar-title{font-size:18px;font-weight:800;flex:1}
+.tb{padding:7px 14px;border-radius:18px;font-size:13px;border:none;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-pink{background:var(--pink);color:#fff}
+.tb-outline{background:#fff;color:var(--pink);border:2px solid var(--pink)}
+.tb-ghost{background:#fff;color:var(--muted);border:2px solid var(--border)}
 .tb-active{background:var(--pink);color:#fff}
 
-.status-bar{display:flex;justify-content:space-between;align-items:center;padding:16rpx 24rpx;font-size:24rpx;color:var(--muted)}
+.status-bar{display:flex;justify-content:space-between;padding:10px 14px;font-size:13px;color:var(--muted)}
 .status-link{color:var(--pink);font-weight:600;cursor:pointer}
-.batch-bar{padding:0 24rpx 16rpx}
-.batch-bar button{background:#e53935;color:#fff;border-radius:24rpx;font-size:26rpx;padding:14rpx;width:100%;border:none;font-weight:600;cursor:pointer}
+.batch-bar{padding:0 14px 10px}
+.batch-bar button{background:#e53935;color:#fff;border-radius:18px;font-size:14px;padding:10px;width:100%;border:none;cursor:pointer}
 
-/* 商品列表 */
-.goods-list{padding:0 24rpx 40rpx}
-.goods-item{display:flex;gap:20rpx;padding:20rpx;background:var(--card);border-radius:14rpx;margin-bottom:12rpx;align-items:center;box-shadow:0 2rpx 8rpx rgba(0,0,0,.02);cursor:default}
-.goods-check{width:44rpx;height:44rpx;border-radius:50%;border:2rpx solid #ddd;display:flex;align-items:center;justify-content:center;font-size:22rpx;color:#fff;flex-shrink:0;cursor:pointer;user-select:none}
+.goods-list{padding:0 14px}
+.goods-item{display:flex;gap:12px;padding:12px;background:var(--card);border-radius:10px;margin-bottom:8px;align-items:center}
+.goods-check{width:32px;height:32px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex-shrink:0;cursor:pointer}
 .goods-check.on{background:var(--pink);border-color:var(--pink)}
-.goods-img{width:100rpx;height:130rpx;border-radius:10rpx;object-fit:cover;flex-shrink:0;background:#f5f5f5}
-.goods-placeholder{width:100rpx;height:130rpx;border-radius:10rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:40rpx;flex-shrink:0}
+.goods-img{width:60px;height:80px;border-radius:8px;object-fit:cover;flex-shrink:0;background:#f5f5f5}
+.goods-placeholder{width:60px;height:80px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
 .goods-info{flex:1;overflow:hidden}
-.goods-name{font-size:28rpx;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.goods-meta{font-size:24rpx;color:var(--muted);margin-top:6rpx;display:flex;gap:8rpx;align-items:center}
-.goods-actions{display:flex;flex-direction:column;gap:14rpx;font-size:30rpx;color:#666}
+.goods-name{font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.goods-meta{font-size:12px;color:var(--muted);margin-top:4px}
+.goods-actions{display:flex;flex-direction:column;gap:10px;font-size:18px;color:#666}
 .goods-actions span{cursor:pointer}
-.goods-actions span:first-child:active{color:var(--pink)}
-.goods-actions span:last-child:active{color:#e53935}
 
-/* 弹窗 */
 .modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:flex-end;animation:in .2s}
 @keyframes in{from{opacity:0}}
-.modal-box{background:#fff;border-radius:28rpx 28rpx 0 0;padding:36rpx;width:100%;max-height:85vh;overflow-y:auto;max-width:600px;margin:0 auto}
-.modal-title{font-size:36rpx;font-weight:800;text-align:center;margin-bottom:28rpx}
-.fs{margin-bottom:22rpx}
-.fl{font-size:26rpx;font-weight:600;color:#555;display:block;margin-bottom:8rpx}
-.fi{border:2rpx solid var(--border);border-radius:14rpx;padding:20rpx 24rpx;font-size:28rpx;width:100%;outline:none;background:#fafafa;font-family:inherit}
+.modal-box{background:#fff;border-radius:20px 20px 0 0;padding:24px;width:100%;max-height:85vh;overflow-y:auto;max-width:500px;margin:0 auto}
+.modal-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:20px}
+.fs{margin-bottom:16px}
+.fl{font-size:14px;font-weight:600;color:#555;display:block;margin-bottom:6px}
+.fi{border:2px solid var(--border);border-radius:10px;padding:12px 16px;font-size:15px;width:100%;outline:none;background:#fafafa;font-family:inherit}
 .fi:focus{border-color:var(--pink);background:#fff}
-.frow{display:flex;gap:12rpx}
-.frow .fs{flex:1}
+.frow{display:flex;gap:10px}.frow .fs{flex:1}
 
-.img-grid{display:flex;flex-wrap:wrap;gap:12rpx;margin-top:8rpx}
-.img-cell{position:relative;width:156rpx;height:156rpx}
-.img-cell img{width:100%;height:100%;object-fit:cover;border-radius:10rpx}
-.img-del{position:absolute;top:-8rpx;right:-8rpx;width:34rpx;height:34rpx;background:#e53935;color:#fff;border-radius:50%;text-align:center;line-height:34rpx;font-size:22rpx;cursor:pointer}
-.img-add{width:156rpx;height:156rpx;border:2rpx dashed #ddd;border-radius:10rpx;display:flex;align-items:center;justify-content:center;font-size:52rpx;color:#ccc;cursor:pointer}
-.img-add:active{border-color:var(--pink);color:var(--pink)}
+.img-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.img-cell{position:relative;width:90px;height:90px}
+.img-cell img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.img-del{position:absolute;top:-6px;right:-6px;width:24px;height:24px;background:#e53935;color:#fff;border-radius:50%;text-align:center;line-height:24px;font-size:13px;cursor:pointer}
+.img-add{width:90px;height:90px;border:2px dashed #ddd;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#ccc;cursor:pointer}
 
-.tag-row{display:flex;gap:10rpx;flex-wrap:wrap}
-.tag-chip{padding:12rpx 28rpx;border-radius:28rpx;font-size:24rpx;border:2rpx solid var(--border);background:#fff;cursor:pointer;user-select:none}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag-chip{padding:8px 16px;border-radius:18px;font-size:13px;border:2px solid var(--border);background:#fff;cursor:pointer;user-select:none}
 .tag-chip.on{background:var(--pink);color:#fff;border-color:var(--pink)}
 
-.save-row{display:flex;gap:16rpx;margin-top:28rpx}
-.save-row button{flex:1;border-radius:40rpx;font-size:28rpx;padding:20rpx;border:none;cursor:pointer;font-weight:600}
+.save-row{display:flex;gap:10px;margin-top:20px}
+.save-row button{flex:1;border-radius:24px;font-size:15px;padding:14px;border:none;cursor:pointer;font-weight:600}
 .save-cancel{background:#f5f5f5;color:#666}
 .save-btn{background:linear-gradient(135deg,var(--pink),#c2185b);color:#fff}
 
-.toast{position:fixed;top:20rpx;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12rpx 24rpx;border-radius:24rpx;font-size:14px;z-index:999;animation:in .3s}
+.pwd-row{position:relative;margin-bottom:28px}
+.pwd-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:22px;cursor:pointer;user-select:none}
+
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;z-index:999;animation:in .3s}
 </style>
 </head>
 <body>
@@ -84,22 +79,24 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg)
 <div class="login-wrap" id="loginPage">
   <h1>佳一女装</h1>
   <p class="sub">商家管理后台</p>
-  <input type="password" id="pwdInput" placeholder="管理密码" onkeydown="if(event.key==='Enter')login()">
-  <div id="loginErr" style="color:#e53935;font-size:13rpx;margin-bottom:12rpx;display:none;">密码错误</div>
+  <div class="pwd-row">
+    <input id="pwdInput" placeholder="管理密码" onkeydown="if(event.key==='Enter')login()" oninput="document.getElementById('loginErr').style.display='none'">
+    <span class="pwd-eye" onclick="togglePwdEye()" id="pwdEye">👁</span>
+  </div>
+  <div class="login-err" id="loginErr">密码错误</div>
   <button onclick="login()">进入后台</button>
 </div>
 
 <div class="admin-page" id="adminPage">
   <div class="toolbar">
     <span class="toolbar-title">⚙️ 管理</span>
-    <button class="tb-btn tb-primary" onclick="openModal()">+ 添加</button>
-    <button class="tb-btn tb-outline" onclick="window.open('index.html')">👁 预览</button>
-    <button class="tb-btn" id="editBtn" onclick="toggleEdit()" style="background:#fff;color:var(--muted);border:2rpx solid var(--border);">☑ 编辑</button>
-    <button class="tb-btn tb-ghost" onclick="logout()">退出</button>
+    <button class="tb tb-pink" onclick="openModal()">+ 添加</button>
+    <button class="tb tb-outline" onclick="window.open('index.html')">👁 预览</button>
+    <button class="tb tb-ghost" id="editBtn" onclick="toggleEdit()">☑ 编辑</button>
+    <button class="tb tb-ghost" onclick="logout()">退出</button>
   </div>
-
   <div class="status-bar">
-    <span id="statusText"></span>
+    <span id="statusText">加载中...</span>
     <span class="status-link" id="selectAllLink" style="display:none" onclick="selectAll()">全选</span>
   </div>
   <div class="batch-bar" id="batchBar" style="display:none">
@@ -112,13 +109,11 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg)
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-title" id="modalTitle">添加商品</div>
     <input type="hidden" id="gId">
-
     <div class="fs">
       <span class="fl">商品图片 (<span id="imgCount">0</span>/9)</span>
       <div class="img-grid" id="imgGrid"><div class="img-add" onclick="chooseImg()">+</div></div>
       <input type="file" id="fileInput" accept="image/*" multiple onchange="onFiles(this)" style="display:none">
     </div>
-
     <div class="fs"><span class="fl">名称 *</span><input class="fi" id="gName" placeholder="例如：复古碎花连衣裙"></div>
     <div class="frow">
       <div class="fs"><span class="fl">分类</span><select class="fi" id="gCategory"></select></div>
@@ -133,6 +128,19 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg)
     <div class="save-row">
       <button type="button" class="save-cancel" onclick="closeModal()">取消</button>
       <button type="button" class="save-btn" onclick="doSave()">💾 保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 设置弹窗 -->
+<div class="modal-mask" id="settingsOverlay" style="display:none" onclick="closeSettings(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-title">⚙️ 设置</div>
+    <div class="fs"><span class="fl">新密码</span><input class="fi" type="password" id="newPwd" placeholder="输入新密码"></div>
+    <div class="fs"><span class="fl">确认密码</span><input class="fi" type="password" id="newPwd2" placeholder="再次输入"></div>
+    <div class="save-row">
+      <button class="save-cancel" onclick="closeSettings()">取消</button>
+      <button class="save-btn" onclick="changePwd()">💾 修改密码</button>
     </div>
   </div>
 </div>
@@ -152,24 +160,29 @@ let goods=[],editMode=false,imgs=[];
 
 function login(){
   const pwd=localStorage.getItem('admin_pwd')||'jiayi2024';
-  if(document.getElementById('pwdInput').value===pwd){document.getElementById('loginPage').style.display='none';document.getElementById('adminPage').style.display='block';load();}
-  else{document.getElementById('loginErr').style.display='block';document.getElementById('pwdInput').value=''}
+  if(document.getElementById('pwdInput').value===pwd){
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('adminPage').style.display='block';load();
+  }else{document.getElementById('loginErr').style.display='block'}
 }
 function logout(){document.getElementById('adminPage').style.display='none';document.getElementById('loginPage').style.display='flex';document.getElementById('pwdInput').value=''}
+function togglePwdEye(){
+  const inp=document.getElementById('pwdInput');
+  const eye=document.getElementById('pwdEye');
+  if(inp.type==='password'){inp.type='text';eye.textContent='👁‍🗨'}else{inp.type='password';eye.textContent='👁'}
+}
 
 async function load(){
-  const{data,error}=await sb.from('goods').select('id,name,category,price,image,images,featured').order('created_at',{ascending:false});
-  if(error){toast('加载失败');return}
-  goods=(data||[]).map(g=>({...g,ic:(g.images||[]).length||(g.image?1:0),ck:false}));
-  render();
+  const{data}=await sb.from('goods').select('id,name,category,price,image,images,featured').order('created_at',{ascending:false});
+  goods=(data||[]).map(g=>({...g,ic:(g.images||[]).length||(g.image?1:0),ck:false}));render()
 }
 
 function render(){
   const n=goods.length,sel=goods.filter(g=>g.ck).length;
   document.getElementById('statusText').textContent='共 '+n+' 件'+(editMode?' · 已选 '+sel:'');
   document.getElementById('selectAllLink').style.display=editMode?'inline':'none';
-  document.getElementById('selectAllLink').textContent=sel===n?'取消全选':'全选';
   document.getElementById('batchBar').style.display=editMode&&sel>0?'block':'none';
+  document.getElementById('editBtn').className='tb '+(editMode?'tb-active':'tb-ghost');
 
   document.getElementById('goodsList').innerHTML=goods.map(g=>`
     <div class="goods-item">
@@ -179,23 +192,14 @@ function render(){
       ${!editMode?`<div class="goods-actions"><span data-id="${g.id}" class="edit">✎</span><span data-id="${g.id}" class="del">🗑</span></div>`:''}
     </div>`).join('');
 
-  // 事件委托
-  document.querySelectorAll('.goods-actions .edit').forEach(el=>el.onclick=function(){editGoods(this.dataset.id)});
-  document.querySelectorAll('.goods-actions .del').forEach(el=>el.onclick=function(){delGoods(this.dataset.id)});
+  document.querySelectorAll('.edit').forEach(el=>el.onclick=function(){editGoods(this.dataset.id)});
+  document.querySelectorAll('.del').forEach(el=>el.onclick=function(){delGoods(this.dataset.id)});
   document.querySelectorAll('.goods-check').forEach(el=>el.onclick=function(){toggleCheck(this.dataset.id)});
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
-function toggleEdit(){
-  editMode=!editMode;
-  goods.forEach(g=>g.ck=false);
-  const btn=document.getElementById('editBtn');
-  btn.className='tb-btn '+(editMode?'tb-active':'');
-  if(!editMode){btn.style.background='#fff';btn.style.color='var(--muted)';btn.style.border='2rpx solid var(--border)'}
-  render();
-}
-
+function toggleEdit(){editMode=!editMode;goods.forEach(g=>g.ck=false);render()}
 function toggleCheck(id){const g=goods.find(x=>x.id===id);if(g)g.ck=!g.ck;render()}
 function selectAll(){const all=goods.every(g=>g.ck);goods.forEach(g=>g.ck=!all);render()}
 
@@ -207,32 +211,28 @@ async function batchDelete(){
 }
 async function delGoods(id){if(!confirm('删除这件？'))return;await sb.from('goods').delete().eq('id',id);toast('已删除');load()}
 
-// 弹窗
 function openModal(){editGoods(null)}
 function editGoods(id){
   document.getElementById('gId').value=id||'';
   document.getElementById('modalTitle').textContent=id?'编辑商品':'添加商品';
   document.getElementById('gCategory').innerHTML=CATS.map(c=>`<option value="${c.id}">${c.e} ${c.n}</option>`).join('');
   document.getElementById('seasonTags').innerHTML=SEASONS.map(s=>`<span class="tag-chip">${s}季</span>`).join('');
-  document.querySelectorAll('#seasonTags .tag-chip').forEach(el=>el.onclick=function(){this.classList.toggle('on')});
+  document.querySelectorAll('.tag-chip').forEach(el=>el.onclick=function(){this.classList.toggle('on')});
 
   if(id){
-    const g=goods.find(x=>x.id===id);
-    if(!g)return;
+    const g=goods.find(x=>x.id===id);if(!g)return;
     document.getElementById('gName').value=g.name||'';
     document.getElementById('gCategory').value=g.category||'top';
     document.getElementById('gPrice').value=g.price||'';
     document.getElementById('gNotes').value=g.notes||'';
-    imgs=g.images||[];
-    if(!imgs.length&&g.image)imgs=[g.image];
-    document.querySelectorAll('#seasonTags .tag-chip').forEach(el=>{if((g.season||[]).includes(el.textContent.replace('季','')))el.classList.add('on')});
+    imgs=g.images||[];if(!imgs.length&&g.image)imgs=[g.image];
+    document.querySelectorAll('.tag-chip').forEach(el=>{if((g.season||[]).includes(el.textContent.replace('季','')))el.classList.add('on')});
   }else{
     document.getElementById('gName').value='';document.getElementById('gPrice').value='';
     document.getElementById('gNotes').value='';imgs=[];
-    document.querySelectorAll('#seasonTags .tag-chip').forEach(el=>el.classList.remove('on'));
+    document.querySelectorAll('.tag-chip').forEach(el=>el.classList.remove('on'));
   }
-  renderImgs();
-  document.getElementById('modalOverlay').style.display='flex';
+  renderImgs();document.getElementById('modalOverlay').style.display='flex'
 }
 
 function closeModal(e){if(e&&e.target!==document.getElementById('modalOverlay'))return;document.getElementById('modalOverlay').style.display='none'}
@@ -242,8 +242,7 @@ function onFiles(input){
   Array.from(input.files).slice(0,9-imgs.length).forEach(f=>{
     if(f.size>5*1024*1024){toast('图片太大');return}
     const r=new FileReader();r.onload=e=>{imgs.push(e.target.result);renderImgs()};r.readAsDataURL(f)
-  });
-  input.value=''
+  });input.value=''
 }
 function removeImg(i){imgs.splice(i,1);renderImgs()}
 function renderImgs(){
@@ -255,32 +254,26 @@ async function doSave(){
   const id=document.getElementById('gId').value;
   const name=document.getElementById('gName').value.trim();
   if(!name){toast('请输入名称');return}
-  const btn=document.querySelector('.save-btn');
-  btn.disabled=true;btn.textContent='保存中...';
-
+  const btn=document.querySelector('.save-btn');btn.disabled=true;btn.textContent='保存中...';
   try{
-    // 上传到 Storage
     const urls=[];
     for(const img of imgs){
       if(!img.startsWith('data:')){urls.push(img);continue}
       const mime=img.match(/data:(.*?);/)?.[1]||'image/jpeg';
-      const b64=img.split(',')[1];
-      const bin=atob(b64);const arr=new Uint8Array(bin.length);
+      const b64=img.split(',')[1],bin=atob(b64),arr=new Uint8Array(bin.length);
       for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
       const fn='img_'+Date.now()+'_'+Math.random().toString(36).slice(2,6)+'.jpg';
       const{error}=await sb.storage.from('goods').upload(fn,arr,{contentType:mime,upsert:true});
       if(error)throw error;
       urls.push('https://rixhfnacmselwjtlaohn.supabase.co/storage/v1/object/public/goods/'+fn)
     }
-
     const payload={
-      name, category:document.getElementById('gCategory').value,
+      name,category:document.getElementById('gCategory').value,
       price:parseFloat(document.getElementById('gPrice').value)||0,
       notes:document.getElementById('gNotes').value.trim(),
-      season:JSON.parse(Array.from(document.querySelectorAll('#seasonTags .tag-chip.on')).map(el=>el.textContent.replace('季','')).join('","')?'['+Array.from(document.querySelectorAll('#seasonTags .tag-chip.on')).map(el=>'"'+el.textContent.replace('季','')+'"').join(',')+']':'[]'),
-      images:urls, image:urls.length>0?urls[0]:'', featured:false
+      season:JSON.parse('['+Array.from(document.querySelectorAll('.tag-chip.on')).map(el=>'"'+el.textContent.replace('季','')+'"').join(',')+']'),
+      images:urls,image:urls[0]||'',featured:false
     };
-
     if(id){await sb.from('goods').update(payload).eq('id',id);toast('已更新')}
     else{await sb.from('goods').insert([{...payload,created_at:new Date().toISOString()}]);toast('已上架')}
     closeModal();load()
@@ -288,8 +281,18 @@ async function doSave(){
   btn.disabled=false;btn.textContent='💾 保存'
 }
 
+// 设置
+function openSettings(){document.getElementById('settingsOverlay').style.display='flex'}
+function closeSettings(e){if(e&&e.target!==document.getElementById('settingsOverlay'))return;document.getElementById('settingsOverlay').style.display='none'}
+function changePwd(){
+  const np=document.getElementById('newPwd').value,np2=document.getElementById('newPwd2').value;
+  if(!np||np.length<3){toast('密码至少3位');return}
+  if(np!==np2){toast('两次不一致');return}
+  localStorage.setItem('admin_pwd',np);closeSettings();toast('密码已修改')
+}
+
 function toast(msg){const c=document.getElementById('toastContainer'),el=document.createElement('div');el.className='toast';el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),2200)}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeSettings()}});
 </script>
 </body>
 </html>
