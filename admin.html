@@ -327,31 +327,59 @@ function updateSeason() {
   document.getElementById('gSeason').value = JSON.stringify(s);
 }
 
+async function uploadToStorage(base64) {
+  if (!base64.startsWith('data:')) return base64; // 已经是URL
+  const mime = base64.match(/data:(.*?);/)?.[1] || 'image/jpeg';
+  const b64 = base64.split(',')[1];
+  const binary = atob(b64);
+  const arr = new Uint8Array(binary.length);
+  for (let i=0;i<binary.length;i++) arr[i]=binary.charCodeAt(i);
+  const filename = 'img_'+Date.now()+'_'+Math.random().toString(36).slice(2,6)+'.jpg';
+  const { error } = await sb.storage.from('goods').upload(filename, arr, {contentType:mime,upsert:true});
+  if (error) throw error;
+  return `https://rixhfnacmselwjtlaohn.supabase.co/storage/v1/object/public/goods/${filename}`;
+}
+
 async function save(e) {
   e.preventDefault();
   updateSeason();
-  const id = document.getElementById('gId').value;
-  const payload = {
-    name: document.getElementById('gName').value.trim(),
-    category: document.getElementById('gCategory').value,
-    price: parseFloat(document.getElementById('gPrice').value)||0,
-    notes: document.getElementById('gNotes').value.trim(),
-    season: JSON.parse(document.getElementById('gSeason').value||'[]'),
-    images: editImages,
-    image: editImages.length>0?editImages[0]:'',
-    featured: document.getElementById('gFeatured').value==='true'
-  };
-  if (!payload.name) { toast('请输入名称'); return; }
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = '保存中...';
 
-  if (id) {
-    await sb.from('goods').update(payload).eq('id',id);
-    toast('已更新');
-  } else {
-    await sb.from('goods').insert([{...payload, created_at:new Date().toISOString()}]);
-    toast('已上架');
+  try {
+    // 上传图片到 Storage
+    const urls = [];
+    for (const img of editImages) {
+      const url = await uploadToStorage(img);
+      urls.push(url);
+    }
+
+    const id = document.getElementById('gId').value;
+    const payload = {
+      name: document.getElementById('gName').value.trim(),
+      category: document.getElementById('gCategory').value,
+      price: parseFloat(document.getElementById('gPrice').value)||0,
+      notes: document.getElementById('gNotes').value.trim(),
+      season: JSON.parse(document.getElementById('gSeason').value||'[]'),
+      images: urls,
+      image: urls.length>0?urls[0]:'',
+      featured: document.getElementById('gFeatured').value==='true'
+    };
+    if (!payload.name) { toast('请输入名称'); return; }
+
+    if (id) {
+      await sb.from('goods').update(payload).eq('id',id);
+      toast('已更新');
+    } else {
+      await sb.from('goods').insert([{...payload, created_at:new Date().toISOString()}]);
+      toast('已上架');
+    }
+    closeModal();
+    loadGoods();
+  } catch(err) {
+    toast('保存失败: '+err.message);
   }
-  closeModal();
-  loadGoods();
+  btn.disabled = false; btn.textContent = '💾 保存';
 }
 
 function toast(msg) {
